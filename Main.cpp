@@ -8,6 +8,7 @@
 #include<thread>
 int main()
 {
+	srand(1357937);
 	printFrame();
 	CGAME cg;
 	while (true)
