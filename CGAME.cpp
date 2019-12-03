@@ -1,5 +1,4 @@
 ﻿#include"CGAME.h"
-
 CGAME::~CGAME()
 {
 	if (player)
@@ -27,16 +26,10 @@ void CGAME::updatePosPeople(char key)
 CGAME::CGAME()
 {
 	player = new cPeople;
-	for (int i = 0; i < 5; ++i)
-	{
-		Bear *b=new Bear;
-		VB.push_back(*b);
-	}
-	for (int i = 0; i < 3; ++i)
-	{
-		Owl *o = new Owl;
-		VO.push_back(*o);
-	}
+	Bear b;
+	Owl o;
+	VB.push_back(b);
+	VO.push_back(o);
 }
 
 //void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
@@ -48,16 +41,19 @@ void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 
 void CGAME::updatePosBear()
 {
+	if (rand() % 23 == 1 && VB.size()<=4)
+	{
+		Bear b;
+		VB.push_back(b);
+	}
 	for (unsigned int i = 0; i < VB.size(); ++i)
 	{
 		if (VB[i].getX() == 105)
 		{
 			VB[i].erase(VB[i].getX());
 			VB.pop_front();
-			Bear *b = new Bear;
-			VB.push_back(*b);
 		}
-		if (i == 0)
+		else if (i == 0)
 		{
 			VB[i].move();
 			VB[i].erase(VB[i].getX() - 1);
@@ -65,7 +61,7 @@ void CGAME::updatePosBear()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>8)
+			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
 			{
 				VB[i].move();
 				VB[i].erase(VB[i].getX() - 1);
@@ -77,16 +73,20 @@ void CGAME::updatePosBear()
 
 void CGAME::updatePosOwl()
 {
+	
+	if (rand() % 18 == 1 && VO.size()<=4)
+	{
+		Owl o;
+		VO.push_back(o);
+	}
 	for (unsigned int i = 0; i < VO.size(); ++i)
 	{
 		if (VO[i].getX() == 105)
 		{
 			VO[i].erase(VO[i].getX());
 			VO.pop_front();
-			Owl *o = new Owl;
-			VO.push_back(*o);
 		}
-		if (i == 0)
+		else if (i == 0)
 		{
 			VO[i].move();
 			VO[i].erase(VO[i].getX() - 1);
@@ -94,7 +94,7 @@ void CGAME::updatePosOwl()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>8)
+			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>14)
 			{
 				VO[i].move();
 				VO[i].erase(VO[i].getX() - 1);

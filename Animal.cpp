@@ -11,7 +11,7 @@ void Animal::display()
 			gotoXY(a, b);
 			putchar(A.a[i][j]);
 		}
-		cout << endl;
+		putchar('\n');
 	}
 }
 
@@ -33,8 +33,8 @@ void Animal::erase(int n)
 			int a = n + j;
 			int b = mY + i;
 			gotoXY(a, b);
-			cout << " ";
+			putchar(' ');
 		}
-		cout << endl;
+		putchar('\n');
 	}
 }
