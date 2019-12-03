@@ -3,7 +3,6 @@
 
 #include<iostream>
 #include"console.h"
-#include"CGAME.h"
 
 
 using namespace std;

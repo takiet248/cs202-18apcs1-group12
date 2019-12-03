@@ -2,7 +2,8 @@
 #define _Animal_h_
 
 #include<iostream>
-#include"CGAME.h"
+#include"console.h"
+//#include"CGAME.h"
 
 
 using namespace std;
@@ -18,7 +19,10 @@ protected:
 	int mX, mY;
 	aShape A;
 public:
+	int getX();
 	virtual void display();
+	virtual void move();
+	virtual void erase(int n);
 	//Animal();
 };
 #endif // !_Animal_h_

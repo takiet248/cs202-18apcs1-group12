@@ -40,22 +40,26 @@ void cPeople::display()
 
 void cPeople::Up(int x)
 {
-	mY -= x;
+	if (mY > 1)
+		mY -= x;
 }
 
 void cPeople::Down(int x)
 {
-	mY += x;
+	if (mY < 31)
+		mY += x;
 }
 
 void cPeople::Left(int x)
 {
-	mX -= x;
+	if (mX > 1)
+		mX -= x;
 }
 
 void cPeople::Right(int x)
 {
-	mX += x;
+	if (mX < 103)
+		mX += x;
 }
 
 bool cPeople::isDead()
@@ -64,4 +68,46 @@ bool cPeople::isDead()
 		return true;
 	else
 		return true;
+}
+
+void cPeople::yClear(int m)
+{
+	int y = m;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			int a = mX + j;
+			int b = m + i;
+			gotoXY(a, b);
+			putchar(' ');
+		}
+		putchar('\n');
+	}
+}
+
+int cPeople::getX()
+{
+	return mX;
+}
+
+int cPeople::getY()
+{
+	return mY;
+}
+
+void cPeople::xClear(int m)       
+{
+	int x = m;
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				int a = m + j;
+				int b = mY + i;
+				gotoXY(a, b);
+				putchar(' ');
+			}
+			putchar('\n');
+		}
 }

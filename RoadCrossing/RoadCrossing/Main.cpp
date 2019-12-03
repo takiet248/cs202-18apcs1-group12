@@ -2,10 +2,22 @@
 #include"console.h"
 #include"Draw.h"
 #include"CGAME.h"
-#include"SplashScreen.h"
-
+#include"Ship.h"
+#include"Owl.h"
+#include"Bear.h"
+#include<thread>
 int main()
 {
-	splashScreen();
+	srand(1357937);
+	printFrame();
+	CGAME cg;
+	char key = _getch();
+	while (true)
+	{
+		cg.updatePosPeople(key);
+		cg.updatePosAnimal();
+		Sleep(100);
+	}
+	gotoXY(0, 40);
 	return 0;
 }

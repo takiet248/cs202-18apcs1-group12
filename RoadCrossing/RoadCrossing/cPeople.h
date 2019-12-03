@@ -25,5 +25,10 @@ public:
 	void Left(int x);
 	void Right(int x);
 	bool isDead();
+	void xClear(int m);
+	void yClear(int m);
+	int getX();
+	int getY();
+
 };
 #endif // !_cPeople_h_
