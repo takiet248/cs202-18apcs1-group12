@@ -50,3 +50,6 @@ void TextColor (int color);
 
 //hide cursor
 void Nocursortype();
+
+
+void FixConsoleWindow();

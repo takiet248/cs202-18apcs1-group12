@@ -5,7 +5,9 @@
 #include"Ship.h"
 #include"Owl.h"
 #include"Bear.h"
+#include"SplashScreen.h"
 #include<thread>
+#include"Menu.h"
 char moving;
 CGAME cg;
 void sub()
@@ -29,7 +31,11 @@ void sub()
 
 int main()
 {
+	FixConsoleWindow();
+
+	
 	srand(time(NULL));
+	
 	printFrame();
 
 	char temp;
