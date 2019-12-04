@@ -6,35 +6,47 @@
 #include"Owl.h"
 #include"Bear.h"
 #include<thread>
+char moving;
+CGAME cg;
+void sub()
+{
+	while (true)
+	{
+		if (!cg.getPeople()->isDead())
+		{
+			cg.updatePosPeople(moving);
+			moving = ' ';
+			cg.updatePosAnimal();	
+		}
+		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()))
+		{
+			gotoXY(0, 40);
+			cout << "Impact" << endl;
+		}
+		Sleep(50);
+	}
+}
 
 int main()
 {
-	Nocursortype();
-	srand(1357937);
-	//printFrame();
-	CGAME cg;
-	char key = _getch();
-	while (true)
-	{
-		cg.drawGame();
-		cg.updatePosPeople(key);
-		cg.updatePosAnimal();
-		Sleep(100);
-	}
-	/*int time = 5, state = 1, newTime = 15;
+	srand(time(NULL));
+	printFrame();
+
+	char temp;
 	
+	thread t1(sub);
 	while (true)
 	{
-		system("cls");
-		time--;
-		cout << time << "  " << state;
-		if (time == 0)
+		if (!cg.getPeople()->isDead())
 		{
-			state = 1 - state;
-			time = (state ? newTime / 2 : newTime);
+			temp = _getch();
+			moving = temp;
 		}
-		Sleep(1000);
-	}*/
+		else
+			cg.exitGame((HANDLE)t1.native_handle());
+	}
 	gotoXY(0, 40);
+	
 	return 0;
 }
+

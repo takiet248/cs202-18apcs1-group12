@@ -64,10 +64,7 @@ void cPeople::Right(int x)
 
 bool cPeople::isDead()
 {
-	if (mState == false)
-		return true;
-	else
-		return true;
+	return !mState;
 }
 
 void cPeople::yClear(int m)
@@ -110,4 +107,16 @@ void cPeople::xClear(int m)
 			}
 			putchar('\n');
 		}
+}
+bool cPeople::isImpactWAnimal(vector<Animal*> VA)
+{
+	for (unsigned int i = 0; i < VA.size(); ++i)
+	{
+		if (mX <= VA[i]->getX()+4  && mX >= VA[i]->getX()-5 && mY == VA[i]->getY())
+		{
+			mState = false;
+			return true;
+		}
+	}
+	return false;
 }
