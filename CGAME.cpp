@@ -7,22 +7,6 @@ CGAME::~CGAME()
 
 }
 
-void CGAME::updatePosPeople(char key)
-{
-	if (_kbhit())
-	{
-		key = _getch();
-		if (key == 'a' || key == 'A')
-			player->Left(2);
-		else if (key == 'w' || key == 'W')
-			player->Up(6);
-		else if (key == 'd' || key == 'D')
-			player->Right(2);
-		else if (key == 's' || key == 'S')
-			player->Down(6);
-	}
-}
-
 CGAME::CGAME()
 {
 	player = new cPeople;
@@ -31,7 +15,40 @@ CGAME::CGAME()
 	VB.push_back(b);
 	VO.push_back(o);
 }
-
+cPeople* CGAME::getPeople()
+{
+	return this->player;
+}
+void CGAME::updatePosPeople(char key)
+{
+	player->display();
+		
+	if (key == 'a' || key == 'A')
+	{
+		player->Left(3);
+		player->xClear(player->getX() + 3);
+		player->display();
+	}
+	else if (key == 'w' || key == 'W')
+	{
+		player->Up(6);
+		player->yClear(player->getY() + 6);
+		player->display();
+	}
+	else if (key == 'd' || key == 'D')
+	{
+		player->Right(3);
+		player->xClear(player->getX() - 3);
+		player->display();
+	}
+	else if (key == 's' || key == 'S')
+	{
+		player->Down(6);
+		player->yClear(player->getY() - 6);
+		player->display();
+	}
+	
+}
 //void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 {
@@ -63,6 +80,7 @@ void CGAME::updatePosBear()
 		{
 			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
 			{
+				
 				VB[i].move();
 				VB[i].erase(VB[i].getX() - 1);
 				VB[i].display();
@@ -102,4 +120,34 @@ void CGAME::updatePosOwl()
 			}
 		}
 	}
+}
+
+void CGAME::exitGame(HANDLE)
+{
+	exit(0);
+}
+
+vector<Animal*> CGAME::getAnimal()
+{
+	vector<Animal*> res;
+	Animal *pA;
+	unsigned int i = 0;
+	for (i; i < VB.size() && i < VO.size(); ++i)
+	{
+		pA = &VB[i];
+		res.push_back(pA);
+		pA = &VO[i];
+		res.push_back(pA);
+	}
+	for (i; i < VB.size(); ++i)
+	{
+		pA = &VB[i];
+		res.push_back(pA);
+	}
+	for (i; i < VO.size(); ++i)
+	{
+		pA = &VO[i];
+		res.push_back(pA);
+	}
+	return res;
 }
