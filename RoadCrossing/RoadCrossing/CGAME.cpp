@@ -4,16 +4,25 @@ CGAME::~CGAME()
 	if (player)
 		delete[]player;
 	player = nullptr;
+	if (lights)
+		delete[]player;
+	lights = nullptr;
 
 }
 
 CGAME::CGAME()
 {
 	player = new cPeople;
+	lights = new TrafficLight;
 	Bear b;
 	Owl o;
 	VB.push_back(b);
 	VO.push_back(o);
+}
+
+void CGAME::drawGame()
+{
+	printFrame();
 }
 
 void CGAME::updatePosPeople(char key)
@@ -68,9 +77,9 @@ void CGAME::updatePosBear()
 		}
 		else if (i == 0)
 		{
-			VB[i].move();
-			VB[i].erase(VB[i].getX() - 1);
-			VB[i].display();
+				VB[i].move();
+				VB[i].erase(VB[i].getX() - 1);
+				VB[i].display();
 		}
 		else
 		{

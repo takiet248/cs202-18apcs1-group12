@@ -18,6 +18,8 @@
 #include"Ship.h"
 #include"Train.h"
 #include<thread>
+#include"Draw.h"
+#include"TrafficLight.h"
 
 using namespace std;
 
@@ -28,7 +30,7 @@ private:
 	//deque<Ship> VS;
 	//deque<Train> VT;
 	cPeople *player;
-
+	TrafficLight* lights;
 	//int level;
 public:
 	

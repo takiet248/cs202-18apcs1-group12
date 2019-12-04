@@ -47,3 +47,6 @@ int whereY();
 
 void TextColor (int color);
 //end----------------------Screen----------------------end
+
+//hide cursor
+void Nocursortype();

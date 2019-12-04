@@ -133,6 +133,7 @@
     <ClCompile Include="Owl.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
+    <ClCompile Include="TrafficLight.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Owl.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SplashScreen.h" />
+    <ClInclude Include="TrafficLight.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>
