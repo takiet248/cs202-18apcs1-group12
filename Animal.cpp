@@ -23,6 +23,10 @@ int Animal::getX()
 {
 	return mX;
 }
+int Animal::getY()
+{
+	return mY;
+}
 void Animal::erase(int n)
 {
 	int x = n;
