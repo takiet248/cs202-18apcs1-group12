@@ -24,6 +24,7 @@ void cPeople::show()
 
 void cPeople::display()
 {
+	TextColor(14);
 	int a, b;
 	for (int i = 0; i < 4; i++)
 	{

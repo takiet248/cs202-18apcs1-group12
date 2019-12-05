@@ -18,5 +18,6 @@ Owl::Owl()
 
 void Owl::display()
 {
+	TextColor(14);
 	Animal::display();
 }

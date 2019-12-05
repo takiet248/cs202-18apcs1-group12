@@ -10,9 +10,6 @@ class Train : public Vehicle
 {
 public:
 	Train();
-	void display()
-	{
-		Vehicle::display();
-	}
+	void display();
 };
 #endif // !_Train_h_

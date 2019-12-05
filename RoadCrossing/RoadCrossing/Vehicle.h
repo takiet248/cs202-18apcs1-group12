@@ -18,7 +18,11 @@ protected:
 	int mX, mY;
 public:
 	//Vehicle();
+	int getX();
+	int getY();
 	virtual void display();
+	virtual void move();
+	virtual void erase(int n);
 	
 };
 #endif // !_Vehicle_h_

@@ -26,8 +26,8 @@ class CGAME {
 private:
 	deque<Bear> VB;
 	deque<Owl> VO;
-	//deque<Ship> VS;
-	//deque<Train> VT;
+	deque<Ship> VS;
+	deque<Train> VT;
 	cPeople *player;
 	TrafficLight* lights;
 
@@ -40,6 +40,7 @@ public:
 	cPeople* getPeople();//Lấy thông tin người
 	//CVEHICLE* getVehicle();//Lấy danh sách các xe
 	vector<Animal*> getAnimal();
+	vector<Vehicle*> getVehicle();
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	void exitGame(HANDLE); // Thực hiện thoát Thread
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
@@ -52,6 +53,8 @@ public:
 	void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 	void updatePosBear();
 	void updatePosOwl();
+	void updatePosTrain();
+	void updatePosShip();
 };
 #endif // !_CGAME_H_
 

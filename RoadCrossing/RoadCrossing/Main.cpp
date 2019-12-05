@@ -19,6 +19,7 @@ void sub()
 			cg.updatePosPeople(moving);
 			moving = ' ';
 			cg.updatePosAnimal();	
+			cg.updatePosVehicle();
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()))
 		{
@@ -32,7 +33,7 @@ void sub()
 int main()
 {
 	FixConsoleWindow();
-
+	Nocursortype();
 	
 	srand(time(NULL));
 	
