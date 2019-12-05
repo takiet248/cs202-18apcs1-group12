@@ -24,7 +24,6 @@ void cPeople::show()
 
 void cPeople::display()
 {
-	TextColor(14);
 	int a, b;
 	for (int i = 0; i < 4; i++)
 	{
@@ -114,6 +113,19 @@ bool cPeople::isImpactWAnimal(vector<Animal*> VA)
 	for (unsigned int i = 0; i < VA.size(); ++i)
 	{
 		if (mX <= VA[i]->getX()+4  && mX >= VA[i]->getX()-5 && mY == VA[i]->getY())
+		{
+			mState = false;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool cPeople::isImpactWVehicle(vector<Vehicle*> VV)
+{
+	for (unsigned int i = 0; i < VV.size(); ++i)
+	{
+		if (mX <= VV[i]->getX() + 8 && mX >= VV[i]->getX() - 4 && mY == VV[i]->getY())
 		{
 			mState = false;
 			return true;

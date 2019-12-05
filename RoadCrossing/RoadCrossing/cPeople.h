@@ -6,6 +6,8 @@
 #include<vector>
 #include"Bear.h"
 #include"Owl.h"
+#include"Train.h"
+#include"Ship.h"
 using namespace std;
 
 struct Pshape 
@@ -36,5 +38,6 @@ public:
 	bool isFin();
 	bool isDead();
 	bool isImpactWAnimal(vector<Animal*> VA);
+	bool isImpactWVehicle(vector<Vehicle*> VV);
 };
 #endif // !_cPeople_h_

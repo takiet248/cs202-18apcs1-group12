@@ -1,3 +1,4 @@
+
 #include"cPeople.h"
 #include"console.h"
 #include"Draw.h"
@@ -18,10 +19,10 @@ void sub()
 		{
 			cg.updatePosPeople(moving);
 			moving = ' ';
-			cg.updatePosAnimal();	
+			cg.updatePosAnimal();
 			cg.updatePosVehicle();
 		}
-		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()))
+		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal())||cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
 			gotoXY(0, 40);
 			cout << "Impact" << endl;
@@ -34,13 +35,13 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	
+
 	srand(time(NULL));
-	
+
 	printFrame();
 
 	char temp;
-	
+
 	thread t1(sub);
 	while (true)
 	{
@@ -53,7 +54,6 @@ int main()
 			cg.exitGame((HANDLE)t1.native_handle());
 	}
 	gotoXY(0, 40);
-	
+
 	return 0;
 }
-
