@@ -18,7 +18,6 @@
 #include"Ship.h"
 #include"Train.h"
 #include<thread>
-#include"TrafficLight.h"
 
 using namespace std;
 
@@ -29,7 +28,6 @@ private:
 	deque<Ship> VS;
 	deque<Train> VT;
 	cPeople *player;
-	TrafficLight* lights;
 
 	//int level;
 public:
@@ -38,9 +36,9 @@ public:
 	void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	~CGAME(); // Hủy tài nguyên đã cấp phát
 	cPeople* getPeople();//Lấy thông tin người
-	//CVEHICLE* getVehicle();//Lấy danh sách các xe
+
+	vector<Vehicle*>getVehicle();
 	vector<Animal*> getAnimal();
-	vector<Vehicle*> getVehicle();
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	void exitGame(HANDLE); // Thực hiện thoát Thread
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
@@ -50,11 +48,11 @@ public:
 	//void resumeGame(HANDLE); //Quay lai Thread
 	void updatePosPeople(char key); //Thực hiện điều khiển di chuyển của CPEOPLE
 	void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
+	void updatePosTrain();
+	void updatePosShip();
 	void updatePosAnimal();//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 	void updatePosBear();
 	void updatePosOwl();
-	void updatePosTrain();
-	void updatePosShip();
 };
 #endif // !_CGAME_H_
 
