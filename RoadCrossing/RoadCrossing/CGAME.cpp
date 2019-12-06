@@ -4,7 +4,9 @@ CGAME::~CGAME()
 	if (player)
 		delete[]player;
 	player = nullptr;
-
+	if (lights)
+		delete[]lights;
+	lights = nullptr;
 }
 
 CGAME::CGAME()
@@ -18,6 +20,7 @@ CGAME::CGAME()
 	VO.push_back(o);
 	VT.push_back(t);
 	VS.push_back(s);
+	lights = new TrafficLight;
 }
 cPeople* CGAME::getPeople()
 {
@@ -118,6 +121,35 @@ void CGAME::updatePosOwl()
 		}
 	}
 }
+
+void CGAME::printTrafficLights()
+{
+	lights->change(50);
+	if (lights->getState() == 1)
+	{
+		TextColor(2);
+		gotoXY(111, 19);
+		putchar(178);
+		putchar(178);
+		TextColor(0);
+		gotoXY(111, 20);
+		putchar(178);
+		putchar(178);
+	}
+	else
+	{
+		TextColor(0);
+		gotoXY(111, 19);
+		putchar(178);
+		putchar(178);
+		TextColor(4);
+		gotoXY(111, 20);
+		putchar(178);
+		putchar(178);
+	}
+	
+}
+
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 {
 	updatePosBear();
@@ -139,18 +171,23 @@ void CGAME::updatePosTrain()
 		}
 		else if (i == 0)
 		{
-			VT[i].move();
-			VT[i].erase(VT[i].getX() +1);
-			VT[i].display();
+			if (lights->getState() == 0)
+			{
+				VT[i].move();
+				VT[i].erase(VT[i].getX() + 1);
+				VT[i].display();
+			}
 		}
 		else
 		{
 			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-28)
 			{
-
-				VT[i].move();
-				VT[i].erase(VT[i].getX() + 1);
-				VT[i].display();
+				if (lights->getState() == 0)
+				{
+					VT[i].move();
+					VT[i].erase(VT[i].getX() + 1);
+					VT[i].display();
+				}
 			}
 		}
 	}

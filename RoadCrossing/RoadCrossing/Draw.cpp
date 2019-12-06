@@ -68,6 +68,7 @@ void printPost()
 
 void printFrame()
 {
+	TextColor(8);
 	printBar();
 	printPost();
 }

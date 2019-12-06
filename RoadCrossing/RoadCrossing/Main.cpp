@@ -1,4 +1,3 @@
-
 #include"cPeople.h"
 #include"console.h"
 #include"Draw.h"
@@ -9,6 +8,9 @@
 #include"SplashScreen.h"
 #include<thread>
 #include"Menu.h"
+#include"TrafficLight.h"
+
+
 char moving;
 CGAME cg;
 void sub()
@@ -21,6 +23,7 @@ void sub()
 			moving = ' ';
 			cg.updatePosAnimal();
 			cg.updatePosVehicle();
+			cg.printTrafficLights();
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal())||cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
@@ -37,7 +40,6 @@ int main()
 	Nocursortype();
 
 	srand(time(NULL));
-
 	printFrame();
 
 	char temp;
@@ -54,6 +56,14 @@ int main()
 			cg.exitGame((HANDLE)t1.native_handle());
 	}
 	gotoXY(0, 40);
-
+	
+	/*TrafficLight meow;
+	while (1)
+	{
+		meow.change(10);
+		cout << meow.getTime() << endl;
+		Sleep(1000);
+		system("cls");
+	}*/
 	return 0;
 }

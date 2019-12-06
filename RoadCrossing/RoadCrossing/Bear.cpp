@@ -16,5 +16,6 @@ Bear::Bear()
 
 void Bear::display()
 {
+	TextColor(12);
 	Animal::display();
 }

@@ -17,5 +17,6 @@ Train::Train()
 
 void Train::display()
 {
+	TextColor(10);
 	Vehicle::display();
 }
