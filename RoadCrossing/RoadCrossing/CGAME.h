@@ -19,6 +19,7 @@
 #include"Train.h"
 #include<thread>
 #include"TrafficLight.h"
+#include"Draw.h"
 
 using namespace std;
 

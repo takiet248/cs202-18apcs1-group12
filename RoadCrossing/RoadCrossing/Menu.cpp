@@ -26,7 +26,7 @@ void frameMini(int x, int y)
 void printMenu()
 {
 	Nocursortype();
-	int a = 30, b = 3;
+	int a = 37, b = 3;
 	gotoXY(a, b);
 	TextColor(15);
 	cout << "__/\\\\\\\\____________/\\\\\\\\__/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\__/\\\\\\\\\\_____/\\\\\\__/\\\\\\________/\\\\\\_" << endl;
@@ -57,16 +57,16 @@ void printMenu()
 
 	TextColor(14);
 	for (int i = 1; i <= 4; ++i)
-		frameMini(60, 11 + 3 * i);
+		frameMini(68, 11 + 3 * i);
 
 	TextColor(3);
-	gotoXY(62, 15);
+	gotoXY(69, 15);
 	cout << "NEW GAME             (N)";
-	gotoXY(62, 18);
+	gotoXY(69, 18);
 	cout << "LOAD GAME            (L)";
-	gotoXY(62, 21);
+	gotoXY(69, 21);
 	cout << "SETTING              (S)";
-	gotoXY(62, 24);
+	gotoXY(69, 24);
 	cout << "EXIT GAME            (E)";
 
 	char key;

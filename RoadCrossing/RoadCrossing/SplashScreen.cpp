@@ -13,7 +13,7 @@
 
 void printRoad()
 {
-	int a = 32, b = 2, c = 200;
+	int a = 38, b = 2, c = 200;
 	gotoXY(a, b);
 	TextColor(15);
 	Sleep(c);
@@ -55,7 +55,7 @@ void printRoad()
 
 void printCrossing()
 {
-	int a = 8, b = 13, c = 200;
+	int a = 14, b = 13, c = 200;
 	gotoXY(a, b);
 	TextColor(15);
 	Sleep(c);
@@ -99,13 +99,13 @@ void memberName()
 	Sleep(200);
 	TextColor(15);
 	int a = 24;
-	gotoXY(68, a);
+	gotoXY(75, a);
 	cout << "DESIGNED BY" << endl; 
-	gotoXY(67, a + 1);
+	gotoXY(74, a + 1);
 	cout << "Tran Anh Kiet" << endl;
-	gotoXY(67, a + 2);
+	gotoXY(74, a + 2);
 	cout << "Luu Quoc Doan" << endl;
-	gotoXY(64, a + 3);
+	gotoXY(71, a + 3);
 	cout << "Nguyen Tran Quang Duy" << endl;
 }
 
@@ -115,7 +115,7 @@ void splashScreen()
 	printCrossing();
 	memberName();
 	Sleep(1500);
-	system("cls");
+	//system("cls");
 }
 
 

@@ -27,8 +27,9 @@ void sub()
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal())||cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
-			gotoXY(0, 40);
-			cout << "Impact" << endl;
+			gotoXY(136, 9);
+			TextColor(14);
+			cout << "IMPACT" << endl;
 		}
 		Sleep(50);
 	}
@@ -65,5 +66,9 @@ int main()
 		Sleep(1000);
 		system("cls");
 	}*/
+	//splashScreen();
+	//printMenu();
+	
+	gotoXY(0, 40);
 	return 0;
 }

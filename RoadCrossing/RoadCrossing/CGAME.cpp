@@ -22,6 +22,10 @@ CGAME::CGAME()
 	VS.push_back(s);
 	lights = new TrafficLight;
 }
+void CGAME::drawGame()
+{
+	printFrame();
+}
 cPeople* CGAME::getPeople()
 {
 	return this->player;

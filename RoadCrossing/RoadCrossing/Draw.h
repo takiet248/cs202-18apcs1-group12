@@ -10,6 +10,9 @@ void printSubBar();
 void printBar();
 void printPost();
 void printFrame();
+void printStatusBox();
+void printInstruction();
+void printInstructionBox();
 
 
 #endif // !_Draw_h_
