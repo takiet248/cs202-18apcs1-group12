@@ -6,6 +6,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<Windows.h>
+#include<mmsystem.h>
 using namespace std;
 
 void frameMini(int x, int y);

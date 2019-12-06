@@ -30,6 +30,7 @@ void sub()
 			gotoXY(136, 9);
 			TextColor(14);
 			cout << "IMPACT" << endl;
+			//PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 		}
 		Sleep(50);
 	}
@@ -37,6 +38,8 @@ void sub()
 
 int main()
 {
+	PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+
 	FixConsoleWindow();
 	Nocursortype();
 
@@ -68,7 +71,6 @@ int main()
 	}*/
 	//splashScreen();
 	//printMenu();
-	
 	gotoXY(0, 40);
 	return 0;
 }

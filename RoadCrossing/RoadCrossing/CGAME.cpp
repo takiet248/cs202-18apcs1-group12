@@ -131,7 +131,7 @@ void CGAME::printTrafficLights()
 	lights->change(50);
 	if (lights->getState() == 1)
 	{
-		TextColor(2);
+		TextColor(4);
 		gotoXY(111, 19);
 		putchar(178);
 		putchar(178);
@@ -146,7 +146,7 @@ void CGAME::printTrafficLights()
 		gotoXY(111, 19);
 		putchar(178);
 		putchar(178);
-		TextColor(4);
+		TextColor(2);
 		gotoXY(111, 20);
 		putchar(178);
 		putchar(178);
@@ -168,7 +168,7 @@ void CGAME::updatePosTrain()
 	}
 	for (unsigned int i = 0; i < VT.size(); ++i)
 	{
-		if (VT[i].getX() == 8)
+		if (VT[i].getX() == 1)
 		{
 			VT[i].erase(VT[i].getX());
 			VT.pop_front();
@@ -205,7 +205,7 @@ void CGAME::updatePosShip()
 	}
 	for (unsigned int i = 0; i < VS.size(); ++i)
 	{
-		if (VS[i].getX() == 8)
+		if (VS[i].getX() == 1)
 		{
 			VS[i].erase(VS[i].getX());
 			VS.pop_front();

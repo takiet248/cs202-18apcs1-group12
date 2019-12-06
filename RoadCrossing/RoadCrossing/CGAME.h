@@ -20,10 +20,12 @@
 #include<thread>
 #include"TrafficLight.h"
 #include"Draw.h"
+#include<mmsystem.h>
 
 using namespace std;
 
-class CGAME {
+class CGAME 
+{
 private:
 	deque<Bear> VB;
 	deque<Owl> VO;
