@@ -76,18 +76,35 @@ void CGAME::updatePosBear()
 		}
 		else if (i == 0)
 		{
-			VB[i].move();
-			VB[i].erase(VB[i].getX() - 1);
-			VB[i].display();
+			if (VB[i].getX() == -4)
+			{
+				for (int j = 0; j < 5; ++j)
+					VB[i].move();
+				VB[i].display();
+			}
+			else
+			{
+				VB[i].move();
+				VB[i].erase(VB[i].getX() - 1);
+				VB[i].display();
+			}
 		}
 		else
 		{
 			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
 			{
-				
-				VB[i].move();
-				VB[i].erase(VB[i].getX() - 1);
-				VB[i].display();
+				if (VB[i].getX() == -4)
+				{
+					for (int j = 0; j < 5; ++j)
+						VB[i].move();
+					VB[i].display();
+				}
+				else
+				{
+					VB[i].move();
+					VB[i].erase(VB[i].getX() - 1);
+					VB[i].display();
+				}
 			}
 		}
 	}
@@ -110,17 +127,35 @@ void CGAME::updatePosOwl()
 		}
 		else if (i == 0)
 		{
-			VO[i].move();
-			VO[i].erase(VO[i].getX() - 1);
-			VO[i].display();
+			if (VO[i].getX() == -4)
+			{
+				for (int j = 0; j < 5; ++j)
+					VO[i].move();
+				VO[i].display();
+			}
+			else
+			{
+				VO[i].move();
+				VO[i].erase(VO[i].getX() - 1);
+				VO[i].display();
+			}
 		}
 		else
 		{
 			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>14)
 			{
-				VO[i].move();
-				VO[i].erase(VO[i].getX() - 1);
-				VO[i].display();
+				if (VO[i].getX() == -4)
+				{
+					for (int j = 0; j < 5; ++j)
+						VO[i].move();
+					VO[i].display();
+				}
+				else
+				{
+					VO[i].move();
+					VO[i].erase(VO[i].getX() - 1);
+					VO[i].display();
+				}
 			}
 		}
 	}
@@ -177,9 +212,18 @@ void CGAME::updatePosTrain()
 		{
 			if (lights->getState() == 0)
 			{
-				VT[i].move();
-				VT[i].erase(VT[i].getX() + 1);
-				VT[i].display();
+				if(VT[i].getX() == 110)
+				{
+					for (int j = 0; j < 8; ++j)
+						VT[i].move();
+					VT[i].display();
+				}
+				else
+				{
+					VT[i].move();
+					VT[i].erase(VT[i].getX() + 1);
+					VT[i].display();
+				}
 			}
 		}
 		else
@@ -188,9 +232,18 @@ void CGAME::updatePosTrain()
 			{
 				if (lights->getState() == 0)
 				{
-					VT[i].move();
-					VT[i].erase(VT[i].getX() + 1);
-					VT[i].display();
+					if (VT[i].getX() == 110)
+					{
+						for (int j = 0; j < 8; ++j)
+							VT[i].move();
+						VT[i].display();
+					}
+					else
+					{
+						VT[i].move();
+						VT[i].erase(VT[i].getX() + 1);
+						VT[i].display();
+					}
 				}
 			}
 		}
@@ -212,18 +265,36 @@ void CGAME::updatePosShip()
 		}
 		else if (i == 0)
 		{
-			VS[i].move();
-			VS[i].erase(VS[i].getX() +1);
-			VS[i].display();
+
+			if (VS[i].getX() == 110)
+			{
+				for (int j = 0; j < 8; ++j)
+					VS[i].move();
+				VS[i].display();
+			}
+			else
+			{
+				VS[i].move();
+				VS[i].erase(VS[i].getX() + 1);
+				VS[i].display();
+			}
 		}
 		else
 		{
 			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-28)
 			{
-
-				VS[i].move();
-				VS[i].erase(VS[i].getX() + 1);
-				VS[i].display();
+				if (VS[i].getX() == 110)
+				{
+					for (int j = 0; j < 8; ++j)
+						VS[i].move();
+					VS[i].display();
+				}
+				else
+				{
+					VS[i].move();
+					VS[i].erase(VS[i].getX() + 1);
+					VS[i].display();
+				}
 			}
 		}
 	}
