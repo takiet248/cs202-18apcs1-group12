@@ -35,7 +35,11 @@ private:
 	deque<Train> VT;
 	cPeople *player;
 	TrafficLight* lights;
+	int speed;
+	unsigned int curVN;
+	unsigned int curAN;
 	int level;
+	bool finalw;
 public:
 	
 	CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
@@ -63,7 +67,9 @@ public:
 	void printLevel();
 	void levelUp();
 	void win();
-
+	int getSpeed();
+	void finalWin();
+	bool isFW();
 };
 #endif // !_CGAME_H_
 
