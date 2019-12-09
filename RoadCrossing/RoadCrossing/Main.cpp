@@ -1,4 +1,4 @@
-#include"cPeople.h"
+﻿#include"cPeople.h"
 #include"console.h"
 #include"Draw.h"
 #include"CGAME.h"
@@ -30,7 +30,12 @@ void sub()
 			gotoXY(136, 9);
 			TextColor(14);
 			cout << "IMPACT" << endl;
-			//PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+		}
+		if (cg.getPeople()->isFinish())
+		{
+			gotoXY(136, 9);
+			TextColor(14);
+			cout << "FINISH" << endl;
 		}
 		Sleep(50);
 	}
@@ -44,23 +49,44 @@ int main()
 	Nocursortype();
 
 	srand(time(NULL));
-	printFrame();
-
+	cg.drawGame();
 	char temp;
-
+	string name;
 	thread t1(sub);
 	while (true)
 	{
+		temp = _getch();
+
 		if (!cg.getPeople()->isDead())
 		{
-			temp = _getch();
-			moving = temp;
+			if (temp == 27)
+			{
+				cg.exitGame(t1.native_handle());
+				//return;
+			}
+			else if (temp == 'p')
+			{
+				cg.pauseGame(t1.native_handle());
+			}
+			else
+			{
+				cg.resumeGame((HANDLE)t1.native_handle());
+				moving = temp; 
+			}
 		}
+
 		else
-			cg.exitGame((HANDLE)t1.native_handle());
+		{
+			//if (temp == 'Y') cg.startGame();
+			//else {
+				cg.exitGame(t1.native_handle());
+				//return;
+		//	}
+		}
+
 	}
-	gotoXY(0, 40);
-	
+
+
 	/*TrafficLight meow;
 	while (1)
 	{

@@ -1,5 +1,6 @@
 #include"Animal.h"
 #include<mutex>
+
 void Animal::display()
 {
 	for (int i = 0; i < 4; i++)

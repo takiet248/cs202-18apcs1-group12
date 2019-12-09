@@ -1,4 +1,5 @@
 ﻿#include"CGAME.h"
+
 CGAME::~CGAME()
 {
 	if (player)
@@ -21,19 +22,23 @@ CGAME::CGAME()
 	VT.push_back(t);
 	VS.push_back(s);
 	lights = new TrafficLight;
+	level = 1;
 }
+
 void CGAME::drawGame()
 {
 	printFrame();
 }
+
 cPeople* CGAME::getPeople()
 {
 	return this->player;
 }
+
 void CGAME::updatePosPeople(char key)
 {
 	player->display();
-		
+
 	if (key == 'a' || key == 'A')
 	{
 		player->Left(3);
@@ -58,8 +63,9 @@ void CGAME::updatePosPeople(char key)
 		player->yClear(player->getY() - 6);
 		player->display();
 	}
-	
+
 }
+
 void CGAME::updatePosBear()
 {
 	if (rand() % 23 == 1 && VB.size()<=4)
@@ -189,11 +195,20 @@ void CGAME::printTrafficLights()
 	
 }
 
+void CGAME::levelUp()
+{
+	if (player->isFinish())
+	{
+		level++;
+	}
+}
+
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 {
 	updatePosBear();
 	updatePosOwl();
 }
+
 void CGAME::updatePosTrain()
 {
 	if (rand() % 22 == 1 && VT.size() <= 4)
@@ -299,14 +314,28 @@ void CGAME::updatePosShip()
 		}
 	}
 }
+
 void CGAME::updatePosVehicle()
 {
 	updatePosShip();
 	updatePosTrain();
 }
+
 void CGAME::exitGame(HANDLE)
 {
 	exit(0);
+}
+
+void CGAME::pauseGame(HANDLE handle_)
+{
+	SuspendThread(handle_);
+
+}
+
+void CGAME::resumeGame(HANDLE handle_)
+{
+	while (ResumeThread(handle_) > 0)
+		;
 }
 
 vector<Animal*> CGAME::getAnimal()

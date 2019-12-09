@@ -21,6 +21,7 @@
 #include"TrafficLight.h"
 #include"Draw.h"
 #include<mmsystem.h>
+#include<fstream>
 
 using namespace std;
 
@@ -33,7 +34,7 @@ private:
 	deque<Train> VT;
 	cPeople *player;
 	TrafficLight* lights;
-	//int level;
+	int level;
 public:
 	
 	CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
@@ -45,11 +46,11 @@ public:
 	vector<Animal*> getAnimal();
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	void exitGame(HANDLE); // Thực hiện thoát Thread
+	void pauseGame(HANDLE handle_);
+	void resumeGame(HANDLE handle_);
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
 	void loadGame(istream); // Thực hiện tải lại trò chơi đã lưu
-	void saveGame(istream); // Thực hiện lưu lại dữ liệu trò chơi
-	//void pauseGame(HANDLE); // Tạm dừng Thread
-	//void resumeGame(HANDLE); //Quay lai Thread
+	void saveGame(string fileName); // Thực hiện lưu lại dữ liệu trò chơi
 	void updatePosPeople(char key); //Thực hiện điều khiển di chuyển của CPEOPLE
 	void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 	void updatePosTrain();
@@ -58,6 +59,8 @@ public:
 	void updatePosBear();
 	void updatePosOwl();
 	void printTrafficLights();
+	void levelUp();
+
 };
 #endif // !_CGAME_H_
 

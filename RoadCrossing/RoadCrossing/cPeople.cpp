@@ -63,6 +63,14 @@ void cPeople::Right(int x)
 		mX += x;
 }
 
+bool cPeople::isFinish()
+{
+	if (mY == 1)
+		return true;
+	else
+		return false;
+}
+
 bool cPeople::isDead()
 {
 	return !mState;

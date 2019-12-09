@@ -20,7 +20,7 @@ class cPeople
 private:
 	Pshape A;
 	int mX, mY;
-	bool mState=true;
+	bool mState = true;
 public:
 	cPeople();
 	void show();
@@ -29,13 +29,13 @@ public:
 	void Down(int x);
 	void Left(int x);
 	void Right(int x);
-	
+
 	void xClear(int m);
 	void yClear(int m);
 	int getX();
 	int getY();
 	//__________________________________________
-	bool isFin();
+	bool isFinish();
 	bool isDead();
 	bool isImpactWAnimal(vector<Animal*> VA);
 	bool isImpactWVehicle(vector<Vehicle*> VV);
