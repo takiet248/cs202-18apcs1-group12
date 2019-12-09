@@ -211,7 +211,8 @@ void CGAME::levelUp()
 
 void CGAME::win()
 {
-	clrscr();
+	system("cls");
+	Sleep(500);
 	player->reset();
 	levelUp();
 	printFrame();

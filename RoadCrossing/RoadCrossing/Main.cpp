@@ -37,6 +37,7 @@ void sub()
 			gotoXY(136, 9);
 			TextColor(14);
 			cout << "FINISH";
+			PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 			cg.win();
 		}
 		Sleep(50);
@@ -75,18 +76,14 @@ int main()
 			else if (temp == 'p')
 			{
 				cg.pauseGame(t1.native_handle());
-				TextColor(13);
-				gotoXY(134, 8);
-				cout << "GAME PAUSED";
-				gotoXY(131, 9);
-				cout << "PRESS R TO RESUME";
+				
 			}
 			else if (temp == 'r')
 			{
-				gotoXY(134, 8);
+				/*gotoXY(134, 8);
 				cout << "           ";
 				gotoXY(131, 9);
-				cout << "                       ";
+				cout << "                       ";*/
 				cg.resumeGame((HANDLE)t1.native_handle());
 				moving = temp;
 			}
