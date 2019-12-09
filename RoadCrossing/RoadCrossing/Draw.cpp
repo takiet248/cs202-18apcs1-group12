@@ -81,27 +81,27 @@ void printFrame()
 void printStatusBox()
 {
 	TextColor(10);
-	gotoXY(134, 2);
-	cout << "STATUS BOX" << endl;
+	gotoXY(135, 2);
+	cout << "STATUS BOX";
 	TextColor(12);
 	gotoXY(125,5);
-	cout << "LEVEL:  " << endl;
+	cout << "LEVEL:  ";
 
 
 	TextColor(8);
-	gotoXY(120, 0);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 0);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
-	gotoXY(120, 14);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 14);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
-	gotoXY(120, 4);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 4);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
 
 	for (int i = 1; i < 4; i++)
 	{
-		gotoXY(119, i);
+		gotoXY(120, i);
 		putchar(186);
 	}
 
@@ -113,7 +113,7 @@ void printStatusBox()
 
 	for (int i = 5; i < 14; i++)
 	{
-		gotoXY(119, i);
+		gotoXY(120, i);
 		putchar(186);
 	}
 
@@ -122,9 +122,9 @@ void printStatusBox()
 		gotoXY(159, i);
 		putchar(186);
 	}
-	gotoXY(119, 4); putchar(204);
-	gotoXY(119, 14); putchar(200);
-	gotoXY(119, 0); putchar(201);
+	gotoXY(120, 4); putchar(204);
+	gotoXY(120, 14); putchar(200);
+	gotoXY(120, 0); putchar(201);
 
 	gotoXY(159, 4); putchar(185);
 	gotoXY(159, 14); putchar(188);
@@ -134,52 +134,52 @@ void printStatusBox()
 void printInstruction()
 {
 	TextColor(11);
-	gotoXY(133, 18);
-	cout << "INSTRUCTIONS" << endl;
+	gotoXY(134, 18);
+	cout << "INSTRUCTIONS";
 	int a = 125, b = 20;
 	gotoXY(a, b + 1);
 	TextColor(6);
-	cout << "PRESS L TO SAVE GAME" << endl;
+	cout << "PRESS L TO SAVE GAME";
 	gotoXY(a, b + 3);
-	cout << "PRESS T TO LOAD GAME" << endl;
+	cout << "PRESS T TO LOAD GAME";
 	gotoXY(a, b + 5);
-	cout << "PRESS P TO PAUSE GAME" << endl;
+	cout << "PRESS P TO PAUSE GAME";
 	gotoXY(a, b + 7);
-	cout << "PRESS ESC TO EXIT GAME" << endl;
+	cout << "PRESS ESC TO EXIT GAME";
 	gotoXY(a, b + 9);
 
 	TextColor(5);
-	cout << "PRESS W TO MOVE UPWARD" << endl;
+	cout << "PRESS W TO MOVE UPWARD";
 	gotoXY(a, b + 11);
-	cout << "PRESS S TO MOVE DOWNWARD" << endl;
+	cout << "PRESS S TO MOVE DOWNWARD";
 	gotoXY(a, b + 13);
-	cout << "PRESS A TO MOVE TO THE LEFT" << endl;
+	cout << "PRESS A TO MOVE TO THE LEFT";
 	gotoXY(a, b + 15);
-	cout << "PRESS D TO MOVE TO THE RIGHT" << endl;
+	cout << "PRESS D TO MOVE TO THE RIGHT";
 }
 
 void printInstructionBox()
 {
 	TextColor(8);
-	gotoXY(120, 16);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 16);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
 
-	gotoXY(120, 20);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 20);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
 
-	gotoXY(120, 28);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 28);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
 
-	gotoXY(120, 36);
-	for (int i = 0; i < 39; i++)
+	gotoXY(121, 36);
+	for (int i = 0; i < 38; i++)
 		putchar(205);
 
 	for (int i = 29; i < 36; i++)
 	{
-		gotoXY(119, i);
+		gotoXY(120, i);
 		putchar(186);
 	}
 
@@ -191,7 +191,7 @@ void printInstructionBox()
 
 	for (int i = 21; i < 28; i++)
 	{
-		gotoXY(119, i);
+		gotoXY(120, i);
 		putchar(186);
 	}
 
@@ -203,7 +203,7 @@ void printInstructionBox()
 
 	for (int i = 17; i < 20; i++)
 	{
-		gotoXY(119, i);
+		gotoXY(120, i);
 		putchar(186);
 	}
 
@@ -218,8 +218,10 @@ void printInstructionBox()
 	gotoXY(159, 36); putchar(188);
 	gotoXY(159, 16); putchar(187);
 
-	gotoXY(119, 28); putchar(204);
-	gotoXY(119, 20); putchar(204);
-	gotoXY(119, 36); putchar(200);
-	gotoXY(119, 16); putchar(201);
+	gotoXY(120, 28); putchar(204);
+	gotoXY(120, 20); putchar(204);
+	gotoXY(120, 36); putchar(200);
+	gotoXY(120, 16); putchar(201);
 }
+
+

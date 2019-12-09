@@ -111,7 +111,7 @@ void memberName()
 
 void splashScreen()
 {
-	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC | SND_LOOP);
+	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC );
 	printRoad();
 	printCrossing();
 	memberName();

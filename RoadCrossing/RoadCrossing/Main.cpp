@@ -15,6 +15,7 @@ char moving;
 CGAME cg;
 void sub()
 {
+	cg.printLevel();
 	while (true)
 	{
 		if (!cg.getPeople()->isDead())
@@ -25,17 +26,18 @@ void sub()
 			cg.updatePosVehicle();
 			cg.printTrafficLights();
 		}
-		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal())||cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
+		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
 			gotoXY(136, 9);
 			TextColor(14);
-			cout << "IMPACT" << endl;
+			cout << "GAME OVER";
 		}
 		if (cg.getPeople()->isFinish())
 		{
 			gotoXY(136, 9);
 			TextColor(14);
-			cout << "FINISH" << endl;
+			cout << "FINISH";
+			cg.win();
 		}
 		Sleep(50);
 	}
@@ -43,20 +45,26 @@ void sub()
 
 int main()
 {
-	PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
-
 	FixConsoleWindow();
 	Nocursortype();
+	int meow = cg.Menu();
+	if (meow == -1)
+	{
+		system("cls");
+		return 0;
+	}
+	else 
+	{
+		PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+	}
 
 	srand(time(NULL));
 	cg.drawGame();
 	char temp;
-	string name;
 	thread t1(sub);
 	while (true)
 	{
 		temp = _getch();
-
 		if (!cg.getPeople()->isDead())
 		{
 			if (temp == 27)
@@ -67,14 +75,26 @@ int main()
 			else if (temp == 'p')
 			{
 				cg.pauseGame(t1.native_handle());
+				TextColor(13);
+				gotoXY(134, 8);
+				cout << "GAME PAUSED";
+				gotoXY(131, 9);
+				cout << "PRESS R TO RESUME";
+			}
+			else if (temp == 'r')
+			{
+				gotoXY(134, 8);
+				cout << "           ";
+				gotoXY(131, 9);
+				cout << "                       ";
+				cg.resumeGame((HANDLE)t1.native_handle());
+				moving = temp;
 			}
 			else
 			{
-				cg.resumeGame((HANDLE)t1.native_handle());
-				moving = temp; 
+				moving = temp;
 			}
 		}
-
 		else
 		{
 			//if (temp == 'Y') cg.startGame();
@@ -83,7 +103,6 @@ int main()
 				//return;
 		//	}
 		}
-
 	}
 
 

@@ -21,7 +21,6 @@ void Vehicle::display()
 			gotoXY(a, b);
 			putchar(A.a[i][j]);
 		}
-		cout << endl;
 	}
 }
 
@@ -42,6 +41,5 @@ void Vehicle::erase(int n)
 			gotoXY(a, b);
 			putchar(' ');
 		}
-		putchar('\n');
 	}
 }

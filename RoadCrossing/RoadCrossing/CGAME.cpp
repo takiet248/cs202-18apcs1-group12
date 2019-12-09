@@ -195,12 +195,27 @@ void CGAME::printTrafficLights()
 	
 }
 
+void CGAME::printLevel()
+{
+	TextColor(15);
+	gotoXY(140, 5);
+	cout << level;
+}
+
 void CGAME::levelUp()
 {
-	if (player->isFinish())
-	{
-		level++;
-	}
+	level++;
+	if (level > 5)
+		level = 1;
+}
+
+void CGAME::win()
+{
+	clrscr();
+	player->reset();
+	levelUp();
+	printFrame();
+	printLevel();
 }
 
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
@@ -328,14 +343,12 @@ void CGAME::exitGame(HANDLE)
 
 void CGAME::pauseGame(HANDLE handle_)
 {
-	SuspendThread(handle_);
-
+	SuspendThread(handle_);	
 }
 
 void CGAME::resumeGame(HANDLE handle_)
 {
-	while (ResumeThread(handle_) > 0)
-		;
+	while (ResumeThread(handle_) > 0);
 }
 
 vector<Animal*> CGAME::getAnimal()
@@ -361,6 +374,33 @@ vector<Animal*> CGAME::getAnimal()
 		res.push_back(pA);
 	}
 	return res;
+}
+
+int CGAME::Menu()
+{
+	splashScreen();
+	bool validInput = false;
+	char input;
+	while (!validInput)
+	{
+		printMenu();
+		if (_kbhit)
+		{
+			input = _getch();
+			if (input == 27)
+			{
+				system("cls");
+				return -1;
+			}
+			else
+			{
+				system("cls");
+				//printFrame();
+				validInput = true;
+			}
+		}
+	}
+	return 0;
 }
 
 vector<Vehicle*> CGAME::getVehicle()

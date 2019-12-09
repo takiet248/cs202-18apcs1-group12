@@ -12,7 +12,6 @@ void Animal::display()
 			gotoXY(a, b);
 			putchar(A.a[i][j]);
 		}
-		putchar('\n');
 	}
 }
 
@@ -20,14 +19,17 @@ void Animal::move()
 {
 	++mX;
 }
+
 int Animal::getX()
 {
 	return mX;
 }
+
 int Animal::getY()
 {
 	return mY;
 }
+
 void Animal::erase(int n)
 {
 	int x = n;
@@ -40,6 +42,5 @@ void Animal::erase(int n)
 			gotoXY(a, b);
 			putchar(' ');
 		}
-		putchar('\n');
 	}
 }

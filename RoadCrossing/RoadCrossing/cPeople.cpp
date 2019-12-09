@@ -35,7 +35,6 @@ void cPeople::display()
 			gotoXY(a, b);
 			putchar(A.a[i][j]);
 		}
-		cout << endl;
 	}
 }
 
@@ -88,7 +87,6 @@ void cPeople::yClear(int m)
 			gotoXY(a, b);
 			putchar(' ');
 		}
-		putchar('\n');
 	}
 }
 
@@ -114,9 +112,9 @@ void cPeople::xClear(int m)
 				gotoXY(a, b);
 				putchar(' ');
 			}
-			putchar('\n');
 		}
 }
+
 bool cPeople::isImpactWAnimal(vector<Animal*> VA)
 {
 	for (unsigned int i = 0; i < VA.size(); ++i)
@@ -141,4 +139,11 @@ bool cPeople::isImpactWVehicle(vector<Vehicle*> VV)
 		}
 	}
 	return false;
+}
+
+void cPeople::reset()
+{
+	mX = 55;
+	mY = 31;
+	mState = true;
 }

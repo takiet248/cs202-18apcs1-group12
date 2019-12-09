@@ -39,5 +39,7 @@ public:
 	bool isDead();
 	bool isImpactWAnimal(vector<Animal*> VA);
 	bool isImpactWVehicle(vector<Vehicle*> VV);
+	void reset();
+
 };
 #endif // !_cPeople_h_

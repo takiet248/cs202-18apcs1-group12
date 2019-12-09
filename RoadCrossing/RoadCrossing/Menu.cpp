@@ -78,7 +78,7 @@ void printMenu()
 	gotoXY(69, 24);
 	cout << "EXIT GAME            (E)";
 
-	char key;
+	/*char key;
 	if (_kbhit)
 	{
 		key = _getch();
@@ -102,5 +102,5 @@ void printMenu()
 		{
 
 		}
-	}
+	}*/
 }

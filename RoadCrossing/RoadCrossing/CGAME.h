@@ -22,7 +22,8 @@
 #include"Draw.h"
 #include<mmsystem.h>
 #include<fstream>
-
+#include"Menu.h"
+#include"SplashScreen.h"
 using namespace std;
 
 class CGAME 
@@ -41,9 +42,9 @@ public:
 	void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	~CGAME(); // Hủy tài nguyên đã cấp phát
 	cPeople* getPeople();//Lấy thông tin người
-
 	vector<Vehicle*>getVehicle();
 	vector<Animal*> getAnimal();
+	int Menu();
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 	void exitGame(HANDLE); // Thực hiện thoát Thread
 	void pauseGame(HANDLE handle_);
@@ -59,7 +60,9 @@ public:
 	void updatePosBear();
 	void updatePosOwl();
 	void printTrafficLights();
+	void printLevel();
 	void levelUp();
+	void win();
 
 };
 #endif // !_CGAME_H_
