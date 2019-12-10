@@ -1,5 +1,6 @@
 ﻿#include"CGAME.h"
-
+const int MaxObject = 11;
+const int MaxSpeed = 30;
 CGAME::~CGAME()
 {
 	if (player)
@@ -13,18 +14,17 @@ CGAME::~CGAME()
 CGAME::CGAME()
 {
 	player = new cPeople;
-	Bear b;
-	Owl o;
-	Train t;
-	Ship s;
-	VB.push_back(b);
-	VO.push_back(o);
-	VT.push_back(t);
-	VS.push_back(s);
 	lights = new TrafficLight;
-	level = 1;
+	level = 13;
+	speed = 200;
+	curAN = 2;
+	curVN = 2;
+	finalw = false;
 }
-
+int CGAME::getSpeed()
+{
+	return speed;
+}
 void CGAME::drawGame()
 {
 	printFrame();
@@ -68,7 +68,7 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
-	if (rand() % 23 == 1 && VB.size()<=4)
+	if (rand() % 23 == 1 && VB.size()<curAN)
 	{
 		Bear b;
 		VB.push_back(b);
@@ -119,7 +119,7 @@ void CGAME::updatePosBear()
 void CGAME::updatePosOwl()
 {
 	
-	if (rand() % 18 == 1 && VO.size()<=4)
+	if (rand() % 18 == 1 && VO.size()<curAN)
 	{
 		Owl o;
 		VO.push_back(o);
@@ -204,19 +204,141 @@ void CGAME::printLevel()
 
 void CGAME::levelUp()
 {
-	level++;
-	if (level > 5)
-		level = 1;
+	++level;
 }
-
+bool CGAME::isFW()
+{
+	return finalw;
+}
+void CGAME::finalWin()
+{
+	finalw = true;
+}
 void CGAME::win()
 {
+<<<<<<< HEAD
 	system("cls");
 	Sleep(500);
 	player->reset();
 	levelUp();
 	printFrame();
 	printLevel();
+=======
+	clrscr();
+	gotoXY(50, 20);
+	bool finalw=false;
+	cout << "LEVEL " << level + 1 << endl;
+	if (level<12)
+	{
+		int t = rand() % 3;
+		if (t == 0)
+		{
+			if (speed > MaxSpeed)
+			{
+				int tmpspeed = speed - level * 10;
+				if (tmpspeed >= MaxSpeed)
+					speed = tmpspeed;
+				else
+					speed = MaxSpeed;
+				gotoXY(50, 22);
+				cout << "+ SPEED" << endl;
+			}
+			else if (curAN < MaxObject)
+			{
+				curAN += 3;
+				gotoXY(50, 22);
+				cout << "+ Animals" << endl;
+			}
+			else if (curVN < MaxObject)
+			{
+				curVN += 3;
+				gotoXY(50, 22);
+				cout << "+ Vehicles" << endl;
+			}
+		}
+		else if (t == 1)
+		{
+			if (curAN<MaxObject)
+			{
+				curAN += 3;
+				gotoXY(50, 22);
+				cout << "+ Animals" << endl;
+			}
+			else if (speed > MaxSpeed)
+
+			{
+				int tmpspeed = speed - level * 10;
+				if (tmpspeed >= MaxSpeed)
+					speed = tmpspeed;
+				else
+					speed = MaxSpeed;
+				gotoXY(50, 22);
+				cout << "+ SPEED" << endl;
+			}
+			else if (curVN < MaxObject)
+			{
+				curVN += 3;
+				gotoXY(50, 22);
+				cout << "+ Vehicles" << endl;
+			}
+		}
+		else if (t == 2)
+		{
+			if (curVN<MaxObject)
+			{
+				curVN += 3;
+				gotoXY(50, 22);
+				cout << "+ Vehicles" << endl;
+			}
+			else if (speed > MaxSpeed)
+
+			{
+				int tmpspeed = speed - level * 10;
+				if (tmpspeed >= MaxSpeed)
+					speed = tmpspeed;
+				else
+					speed = MaxSpeed;
+				gotoXY(50, 22);
+				cout << "+ SPEED" << endl;
+			}
+			else if (curAN < MaxObject)
+			{
+				curAN += 3;
+				gotoXY(50, 22);
+				cout << "+ Animals" << endl;
+			}
+		}
+		gotoXY(50, 24);
+		for (int i = 0; i < 50; ++i)
+		{
+			TextColor(10);
+			cout << "_";
+			Sleep(20);
+		}
+	}
+	else if (level==12)
+	{
+		curAN = curVN = MaxObject;
+		speed = MaxSpeed;
+	}
+	else
+	{
+		finalWin();
+	}
+	if (!finalw)
+	{
+		Sleep(400);
+		clrscr();
+		player->reset();
+		VB.clear();
+		VO.clear();
+		VT.clear();
+		VS.clear();
+		levelUp();
+		printFrame();
+		printLevel();
+	}
+>>>>>>> 034bb5ccc3080a86bca86ce3c2df59dd2d09048a
 }
 
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
@@ -227,7 +349,7 @@ void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 
 void CGAME::updatePosTrain()
 {
-	if (rand() % 22 == 1 && VT.size() <= 4)
+	if (rand() % 22 == 1 && VT.size() < curVN)
 	{
 		Train t;
 		VT.push_back(t);
@@ -259,7 +381,7 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-28)
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
 			{
 				if (lights->getState() == 0)
 				{
@@ -282,7 +404,7 @@ void CGAME::updatePosTrain()
 }
 void CGAME::updatePosShip()
 {
-	if (rand() % 22 == 1 && VS.size() <= 4)
+	if (rand() % 22 == 1 && VS.size() < curVN)
 	{
 		Ship s;
 		VS.push_back(s);
@@ -312,7 +434,7 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-28)
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -385,7 +507,7 @@ int CGAME::Menu()
 	while (!validInput)
 	{
 		printMenu();
-		if (_kbhit)
+		if (_kbhit())
 		{
 			input = _getch();
 			if (input == 27)
