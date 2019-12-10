@@ -10,7 +10,7 @@
 #include"Menu.h"
 #include"TrafficLight.h"
 
-bool init = true;
+
 char moving;
 CGAME cg;
 void sub()
@@ -18,27 +18,13 @@ void sub()
 	cg.printLevel();
 	while (true)
 	{
-		if (!cg.getPeople()->isDead() && !cg.isFW())
+		if (!cg.getPeople()->isDead())
 		{
-			if (init)
-			{
-				
-				for (int i = 0; i < 100; ++i)
-				{
-					cg.updatePosAnimal();
-					cg.updatePosVehicle();
-					cg.printTrafficLights();
-				}
-				init = false;
-			}
-			else
-			{
-				cg.updatePosPeople(moving);
-				moving = ' ';
-				cg.updatePosAnimal();
-				cg.updatePosVehicle();
-				cg.printTrafficLights();
-			}
+			cg.updatePosPeople(moving);
+			moving = ' ';
+			cg.updatePosAnimal();
+			cg.updatePosVehicle();
+			cg.printTrafficLights();
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
@@ -52,20 +38,8 @@ void sub()
 			TextColor(14);
 			cout << "FINISH";
 			cg.win();
-			init = true;
-			//moving = ' ';
 		}
-		/*
-		if (cg.isFW())
-		{
-			clrscr();
-			gotoXY(40, 20);
-			cout << "All Stage Clear, Congratulation!" << endl;
-			break;
-		}
-		*/
-		else
-			Sleep(cg.getSpeed());
+		Sleep(50);
 	}
 }
 
@@ -81,7 +55,7 @@ int main()
 	}
 	else 
 	{
-		//PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+		PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
 
 	srand(time(NULL));
@@ -91,7 +65,7 @@ int main()
 	while (true)
 	{
 		temp = _getch();
-		if (!cg.getPeople()->isDead() && !cg.isFW())
+		if (!cg.getPeople()->isDead())
 		{
 			if (temp == 27)
 			{
@@ -118,10 +92,7 @@ int main()
 			}
 			else
 			{
-				if (cg.getPeople()->isFinish()||init)
-					moving = ' ';
-				else
-					moving = temp;
+				moving = temp;
 			}
 		}
 		else
