@@ -40,8 +40,9 @@ private:
 	unsigned int curAN;
 	int level;
 	bool finalw;
+	bool run;
 public:
-	
+	bool init = true;
 	CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
 	void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 	~CGAME(); // Hủy tài nguyên đã cấp phát
@@ -49,8 +50,9 @@ public:
 	vector<Vehicle*>getVehicle();
 	vector<Animal*> getAnimal();
 	int Menu();
+	void deallocate();
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
-	void exitGame(HANDLE); // Thực hiện thoát Thread
+	void exitGame(HANDLE handle_); // Thực hiện thoát Thread
 	void pauseGame(HANDLE handle_);
 	void resumeGame(HANDLE handle_);
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
@@ -65,11 +67,12 @@ public:
 	void updatePosOwl();
 	void printTrafficLights();
 	void printLevel();
-	void levelUp();
 	void win();
+	void levelUp();
 	int getSpeed();
 	void finalWin();
 	bool isFW();
+	bool isRunning();
 };
 #endif // !_CGAME_H_
 

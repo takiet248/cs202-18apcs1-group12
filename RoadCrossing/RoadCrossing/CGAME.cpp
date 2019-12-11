@@ -1,6 +1,7 @@
 ﻿#include"CGAME.h"
 const int MaxObject = 11;
 const int MaxSpeed = 30;
+
 CGAME::~CGAME()
 {
 	if (player)
@@ -20,7 +21,9 @@ CGAME::CGAME()
 	curAN = 2;
 	curVN = 2;
 	finalw = false;
+	run = true;
 }
+
 int CGAME::getSpeed()
 {
 	return speed;
@@ -202,33 +205,38 @@ void CGAME::printLevel()
 	cout << level;
 }
 
-void CGAME::levelUp()
-{
-	++level;
-}
+
 bool CGAME::isFW()
 {
 	return finalw;
 }
+
+bool CGAME::isRunning()
+{
+	return run;
+}
+
 void CGAME::finalWin()
 {
 	finalw = true;
+	system("cls");
+	printYouWon();
 }
+
 void CGAME::win()
 {
-<<<<<<< HEAD
+	//<<<<<<< HEAD
 	system("cls");
 	Sleep(500);
 	player->reset();
-	levelUp();
 	printFrame();
 	printLevel();
-=======
+	//=======
 	clrscr();
 	gotoXY(50, 20);
-	bool finalw=false;
+	bool finalw = false;
 	cout << "LEVEL " << level + 1 << endl;
-	if (level<12)
+	if (level < 12)
 	{
 		int t = rand() % 3;
 		if (t == 0)
@@ -247,22 +255,22 @@ void CGAME::win()
 			{
 				curAN += 3;
 				gotoXY(50, 22);
-				cout << "+ Animals" << endl;
+				cout << "+ ANIMALS" << endl;
 			}
 			else if (curVN < MaxObject)
 			{
 				curVN += 3;
 				gotoXY(50, 22);
-				cout << "+ Vehicles" << endl;
+				cout << "+ VEHICLES" << endl;
 			}
 		}
 		else if (t == 1)
 		{
-			if (curAN<MaxObject)
+			if (curAN < MaxObject)
 			{
 				curAN += 3;
 				gotoXY(50, 22);
-				cout << "+ Animals" << endl;
+				cout << "+ ANIMALS" << endl;
 			}
 			else if (speed > MaxSpeed)
 
@@ -279,16 +287,16 @@ void CGAME::win()
 			{
 				curVN += 3;
 				gotoXY(50, 22);
-				cout << "+ Vehicles" << endl;
+				cout << "+ VEHICLES" << endl;
 			}
 		}
 		else if (t == 2)
 		{
-			if (curVN<MaxObject)
+			if (curVN < MaxObject)
 			{
 				curVN += 3;
 				gotoXY(50, 22);
-				cout << "+ Vehicles" << endl;
+				cout << "+ VEHICLES" << endl;
 			}
 			else if (speed > MaxSpeed)
 
@@ -305,7 +313,7 @@ void CGAME::win()
 			{
 				curAN += 3;
 				gotoXY(50, 22);
-				cout << "+ Animals" << endl;
+				cout << "+ ANIMALS" << endl;
 			}
 		}
 		gotoXY(50, 24);
@@ -316,14 +324,17 @@ void CGAME::win()
 			Sleep(20);
 		}
 	}
-	else if (level==12)
+	else if (level == 12)
 	{
 		curAN = curVN = MaxObject;
 		speed = MaxSpeed;
 	}
 	else
 	{
+		system("cls");
+		PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
 		finalWin();
+
 	}
 	if (!finalw)
 	{
@@ -338,8 +349,13 @@ void CGAME::win()
 		printFrame();
 		printLevel();
 	}
->>>>>>> 034bb5ccc3080a86bca86ce3c2df59dd2d09048a
 }
+
+void CGAME::levelUp()
+{
+	level++;
+}
+
 
 void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 {
@@ -459,7 +475,7 @@ void CGAME::updatePosVehicle()
 	updatePosTrain();
 }
 
-void CGAME::exitGame(HANDLE)
+void CGAME::exitGame(HANDLE handle_)
 {
 	exit(0);
 }
@@ -472,6 +488,15 @@ void CGAME::pauseGame(HANDLE handle_)
 void CGAME::resumeGame(HANDLE handle_)
 {
 	while (ResumeThread(handle_) > 0);
+}
+
+void CGAME::startGame()
+{
+	system("cls");
+	Sleep(1000);
+	printFrame();
+	resetGame();
+	printLevel();
 }
 
 vector<Animal*> CGAME::getAnimal()
@@ -501,7 +526,6 @@ vector<Animal*> CGAME::getAnimal()
 
 int CGAME::Menu()
 {
-	splashScreen();
 	bool validInput = false;
 	char input;
 	while (!validInput)
@@ -524,6 +548,29 @@ int CGAME::Menu()
 		}
 	}
 	return 0;
+}
+
+void CGAME::deallocate()
+{
+	if (player)
+		delete[]player;
+	player = nullptr;
+	if (lights)
+		delete[]lights;
+	lights = nullptr;
+}
+
+void CGAME::resetGame()
+{
+	player->reset();
+	level = 1;
+	speed = 200;
+	curAN = 2;
+	curVN = 2;
+	finalw = false;
+	deallocate();
+	player = new cPeople;
+	lights = new TrafficLight;
 }
 
 vector<Vehicle*> CGAME::getVehicle()

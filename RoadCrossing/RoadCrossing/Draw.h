@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include"console.h"
+#include<Windows.h>
 
 using namespace std;
 
@@ -13,6 +14,8 @@ void printFrame();
 void printStatusBox();
 void printInstruction();
 void printInstructionBox();
+void printYouWon();
+void printTwinkle();
 
 
 #endif // !_Draw_h_

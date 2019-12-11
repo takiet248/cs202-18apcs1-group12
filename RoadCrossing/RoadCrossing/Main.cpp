@@ -13,16 +13,21 @@
 bool init = true;
 char moving;
 CGAME cg;
+int menuState;
+
 void sub()
 {
 	cg.printLevel();
-	while (true)
+	while (cg.isRunning())
 	{
+		while (cg.getPeople()->isDead()&&cg.isRunning())
+			Sleep(1000);
+		if (!cg.isRunning())
+			return;
 		if (!cg.getPeople()->isDead() && !cg.isFW())
 		{
 			if (init)
 			{
-				
 				for (int i = 0; i < 100; ++i)
 				{
 					cg.updatePosAnimal();
@@ -42,29 +47,31 @@ void sub()
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
-			gotoXY(136, 9);
 			TextColor(14);
+			gotoXY(136, 7);
 			cout << "GAME OVER";
+			gotoXY(132, 8);
+			TextColor(15);
+			cout << "PRESS Y TO RESTART";
+			gotoXY(130, 9);
+			TextColor(12);
+			cout << "PRESS ESC TO EXIT GAME";
+			if (menuState != 1)
+				PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
+
 		}
 		if (cg.getPeople()->isFinish())
 		{
 			gotoXY(136, 9);
 			TextColor(14);
-			cout << "FINISH";
-			PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 			cg.win();
 			init = true;
-			//moving = ' ';
 		}
-		/*
 		if (cg.isFW())
-		{
-			clrscr();
-			gotoXY(40, 20);
-			cout << "All Stage Clear, Congratulation!" << endl;
+		{	
+			clrscr();			
 			break;
 		}
-		*/
 		else
 			Sleep(cg.getSpeed());
 	}
@@ -74,17 +81,19 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	int meow = cg.Menu();
-	if (meow == -1)
+	/*splashScreen();
+	menuState = cg.Menu();
+
+	if (menuState == -1)
 	{
 		system("cls");
 		return 0;
 	}
 	else 
 	{
-		//PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+		PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
-
+	
 	srand(time(NULL));
 	cg.drawGame();
 	char temp;
@@ -92,30 +101,34 @@ int main()
 	while (true)
 	{
 		temp = _getch();
+		temp = toupper(temp);
 		if (!cg.getPeople()->isDead() && !cg.isFW())
 		{
 			if (temp == 27)
 			{
 				cg.exitGame(t1.native_handle());
-				//return;
 			}
-			else if (temp == 'p')
+			else if (temp == 'P')
 			{
 				cg.pauseGame(t1.native_handle());
-				
+				gotoXY(134, 8);
+				TextColor(15);
+				cout << "GAME PAUSED";
+				gotoXY(131, 9);
+				cout << "PRESS R TO RESUME";
 			}
-			else if (temp == 'r')
+			else if (temp == 'R')
 			{
-				/*gotoXY(134, 8);
+				gotoXY(134, 8);
 				cout << "           ";
 				gotoXY(131, 9);
-				cout << "                       ";*/
+				cout << "                  ";
 				cg.resumeGame((HANDLE)t1.native_handle());
 				moving = temp;
 			}
 			else
 			{
-				if (cg.getPeople()->isFinish()||init)
+				if (cg.getPeople()->isFinish() || init)
 					moving = ' ';
 				else
 					moving = temp;
@@ -123,25 +136,17 @@ int main()
 		}
 		else
 		{
-			//if (temp == 'Y') cg.startGame();
-			//else {
+			if (temp == 'Y') 
+				cg.startGame();
+			else 
+			{
 				cg.exitGame(t1.native_handle());
-				//return;
-		//	}
+				return 0;
+			}
 		}
 	}
-
-
-	/*TrafficLight meow;
-	while (1)
-	{
-		meow.change(10);
-		cout << meow.getTime() << endl;
-		Sleep(1000);
-		system("cls");
-	}*/
-	//splashScreen();
-	//printMenu();
+	*/
+	printYouWon();
 	gotoXY(0, 40);
 	return 0;
 }
