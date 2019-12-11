@@ -1,9 +1,6 @@
 ﻿#include"CGAME.h"
-<<<<<<< HEAD
 const int MaxObject = 11;
 const int MaxSpeed = 30;
-=======
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 
 CGAME::~CGAME()
 {
@@ -18,17 +15,8 @@ CGAME::~CGAME()
 CGAME::CGAME()
 {
 	player = new cPeople;
-	Bear b;
-	Owl o;
-	Train t;
-	Ship s;
-	VB.push_back(b);
-	VO.push_back(o);
-	VT.push_back(t);
-	VS.push_back(s);
 	lights = new TrafficLight;
-<<<<<<< HEAD
-	level = 13;
+	level = 1;
 	speed = 200;
 	curAN = 2;
 	curVN = 2;
@@ -39,11 +27,7 @@ CGAME::CGAME()
 int CGAME::getSpeed()
 {
 	return speed;
-=======
-	level = 1;
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 }
-
 void CGAME::drawGame()
 {
 	printFrame();
@@ -87,7 +71,7 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
-	if (rand() % 23 == 1 && VB.size()<=4)
+	if (rand() % 23 == 1 && VB.size()<curAN)
 	{
 		Bear b;
 		VB.push_back(b);
@@ -138,7 +122,7 @@ void CGAME::updatePosBear()
 void CGAME::updatePosOwl()
 {
 	
-	if (rand() % 18 == 1 && VO.size()<=4)
+	if (rand() % 18 == 1 && VO.size()<curAN)
 	{
 		Owl o;
 		VO.push_back(o);
@@ -221,8 +205,6 @@ void CGAME::printLevel()
 	cout << level;
 }
 
-<<<<<<< HEAD
-
 bool CGAME::isFW()
 {
 	return finalw;
@@ -238,26 +220,23 @@ void CGAME::finalWin()
 	finalw = true;
 	system("cls");
 	printYouWon();
-=======
-void CGAME::levelUp()
-{
-	level++;
-	if (level > 5)
-		level = 1;
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
+	VB.clear();
+	VO.clear();
+	VT.clear();
+	VS.clear();
+	deallocate();
 }
+	
+
 
 void CGAME::win()
 {
-	//<<<<<<< HEAD
 	system("cls");
 	Sleep(500);
 	player->reset();
 	printFrame();
 	printLevel();
-	//=======
 	clrscr();
-<<<<<<< HEAD
 	gotoXY(50, 20);
 	bool finalw = false;
 	cout << "LEVEL " << level + 1 << endl;
@@ -356,10 +335,8 @@ void CGAME::win()
 	}
 	else
 	{
-		system("cls");
-		PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
+		PlaySound(TEXT("TetrisPlus.wav"), NULL, SND_ASYNC);
 		finalWin();
-
 	}
 	if (!finalw)
 	{
@@ -374,12 +351,19 @@ void CGAME::win()
 		printFrame();
 		printLevel();
 	}
-=======
-	player->reset();
-	levelUp();
-	printFrame();
-	printLevel();
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
+}
+
+void CGAME::lose()
+{
+	TextColor(14);
+	gotoXY(136, 7);
+	cout << "GAME OVER";
+	gotoXY(132, 8);
+	TextColor(15);
+	cout << "PRESS Y TO RESTART";
+	gotoXY(130, 9);
+	TextColor(12);
+	cout << "PRESS ESC TO EXIT GAME";
 }
 
 void CGAME::levelUp()
@@ -396,7 +380,7 @@ void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 
 void CGAME::updatePosTrain()
 {
-	if (rand() % 22 == 1 && VT.size() <= 4)
+	if (rand() % 22 == 1 && VT.size() < curVN)
 	{
 		Train t;
 		VT.push_back(t);
@@ -428,7 +412,7 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-28)
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
 			{
 				if (lights->getState() == 0)
 				{
@@ -451,7 +435,7 @@ void CGAME::updatePosTrain()
 }
 void CGAME::updatePosShip()
 {
-	if (rand() % 22 == 1 && VS.size() <= 4)
+	if (rand() % 22 == 1 && VS.size() < curVN)
 	{
 		Ship s;
 		VS.push_back(s);
@@ -481,7 +465,7 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-28)
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -562,7 +546,7 @@ int CGAME::Menu()
 	while (!validInput)
 	{
 		printMenu();
-		if (_kbhit)
+		if (_kbhit())
 		{
 			input = _getch();
 			if (input == 27)
@@ -593,12 +577,16 @@ void CGAME::deallocate()
 
 void CGAME::resetGame()
 {
+	finalw = false;
 	player->reset();
+	VT.clear();
+	VB.clear();
+	VO.clear();
+	VS.clear();
 	level = 1;
 	speed = 200;
 	curAN = 2;
 	curVN = 2;
-	finalw = false;
 	deallocate();
 	player = new cPeople;
 	lights = new TrafficLight;

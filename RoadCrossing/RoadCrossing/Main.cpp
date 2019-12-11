@@ -10,7 +10,7 @@
 #include"Menu.h"
 #include"TrafficLight.h"
 
-
+bool init = true;
 char moving;
 CGAME cg;
 int menuState;
@@ -20,7 +20,6 @@ void sub()
 	cg.printLevel();
 	while (cg.isRunning())
 	{
-<<<<<<< HEAD
 		while (cg.getPeople()->isDead()&&cg.isRunning())
 			Sleep(1000);
 		if (!cg.isRunning())
@@ -45,37 +44,20 @@ void sub()
 				cg.updatePosVehicle();
 				cg.printTrafficLights();
 			}
-=======
-		if (!cg.getPeople()->isDead())
-		{
-			cg.updatePosPeople(moving);
-			moving = ' ';
-			cg.updatePosAnimal();
-			cg.updatePosVehicle();
-			cg.printTrafficLights();
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
-			TextColor(14);
-			gotoXY(136, 7);
-			cout << "GAME OVER";
-			gotoXY(132, 8);
-			TextColor(15);
-			cout << "PRESS Y TO RESTART";
-			gotoXY(130, 9);
-			TextColor(12);
-			cout << "PRESS ESC TO EXIT GAME";
+			cg.lose();
+			init = true;
 			if (menuState != 1)
-				PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
-
+				PlaySound(TEXT("TeamRocket.wav"), NULL, SND_ASYNC);
 		}
 		if (cg.getPeople()->isFinish())
 		{
+			PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 			gotoXY(136, 9);
 			TextColor(14);
 			cg.win();
-<<<<<<< HEAD
 			init = true;
 		}
 		if (cg.isFW())
@@ -85,10 +67,6 @@ void sub()
 		}
 		else
 			Sleep(cg.getSpeed());
-=======
-		}
-		Sleep(50);
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 	}
 }
 
@@ -106,7 +84,7 @@ int main()
 	}
 	else 
 	{
-		PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
+		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
 	
 	srand(time(NULL));
@@ -116,12 +94,8 @@ int main()
 	while (true)
 	{
 		temp = _getch();
-<<<<<<< HEAD
 		temp = toupper(temp);
 		if (!cg.getPeople()->isDead() && !cg.isFW())
-=======
-		if (!cg.getPeople()->isDead())
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 		{
 			if (temp == 27)
 			{
@@ -147,20 +121,19 @@ int main()
 			}
 			else
 			{
-<<<<<<< HEAD
 				if (cg.getPeople()->isFinish() || init)
 					moving = ' ';
 				else
 					moving = temp;
-=======
-				moving = temp;
->>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 			}
 		}
 		else
 		{
-			if (temp == 'Y') 
+			if (temp == 'Y')
+			{
+				PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 				cg.startGame();
+			}
 			else 
 			{
 				cg.exitGame(t1.native_handle());
@@ -168,7 +141,6 @@ int main()
 			}
 		}
 	}
-	
 	printYouWon();
 	gotoXY(0, 40);
 	return 0;

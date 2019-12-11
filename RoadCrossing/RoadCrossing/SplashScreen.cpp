@@ -13,7 +13,7 @@
 
 void printRoad()
 {
-	int a = 38, b = 2, c = 200;
+	int a = 39, b = 2, c = 200;
 	gotoXY(a, b);
 	TextColor(15);
 	Sleep(c);
@@ -55,7 +55,7 @@ void printRoad()
 
 void printCrossing()
 {
-	int a = 14, b = 13, c = 200;
+	int a = 15, b = 13, c = 200;
 	gotoXY(a, b);
 	TextColor(15);
 	Sleep(c);
