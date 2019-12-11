@@ -10,7 +10,7 @@
 #include"Menu.h"
 #include"TrafficLight.h"
 
-bool init = true;
+
 char moving;
 CGAME cg;
 int menuState;
@@ -20,6 +20,7 @@ void sub()
 	cg.printLevel();
 	while (cg.isRunning())
 	{
+<<<<<<< HEAD
 		while (cg.getPeople()->isDead()&&cg.isRunning())
 			Sleep(1000);
 		if (!cg.isRunning())
@@ -44,6 +45,15 @@ void sub()
 				cg.updatePosVehicle();
 				cg.printTrafficLights();
 			}
+=======
+		if (!cg.getPeople()->isDead())
+		{
+			cg.updatePosPeople(moving);
+			moving = ' ';
+			cg.updatePosAnimal();
+			cg.updatePosVehicle();
+			cg.printTrafficLights();
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
@@ -65,6 +75,7 @@ void sub()
 			gotoXY(136, 9);
 			TextColor(14);
 			cg.win();
+<<<<<<< HEAD
 			init = true;
 		}
 		if (cg.isFW())
@@ -74,6 +85,10 @@ void sub()
 		}
 		else
 			Sleep(cg.getSpeed());
+=======
+		}
+		Sleep(50);
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 	}
 }
 
@@ -101,8 +116,12 @@ int main()
 	while (true)
 	{
 		temp = _getch();
+<<<<<<< HEAD
 		temp = toupper(temp);
 		if (!cg.getPeople()->isDead() && !cg.isFW())
+=======
+		if (!cg.getPeople()->isDead())
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 		{
 			if (temp == 27)
 			{
@@ -128,10 +147,14 @@ int main()
 			}
 			else
 			{
+<<<<<<< HEAD
 				if (cg.getPeople()->isFinish() || init)
 					moving = ' ';
 				else
 					moving = temp;
+=======
+				moving = temp;
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 			}
 		}
 		else

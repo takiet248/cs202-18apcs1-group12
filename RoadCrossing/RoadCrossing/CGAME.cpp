@@ -1,6 +1,9 @@
 ﻿#include"CGAME.h"
+<<<<<<< HEAD
 const int MaxObject = 11;
 const int MaxSpeed = 30;
+=======
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 
 CGAME::~CGAME()
 {
@@ -15,7 +18,16 @@ CGAME::~CGAME()
 CGAME::CGAME()
 {
 	player = new cPeople;
+	Bear b;
+	Owl o;
+	Train t;
+	Ship s;
+	VB.push_back(b);
+	VO.push_back(o);
+	VT.push_back(t);
+	VS.push_back(s);
 	lights = new TrafficLight;
+<<<<<<< HEAD
 	level = 13;
 	speed = 200;
 	curAN = 2;
@@ -27,7 +39,11 @@ CGAME::CGAME()
 int CGAME::getSpeed()
 {
 	return speed;
+=======
+	level = 1;
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 }
+
 void CGAME::drawGame()
 {
 	printFrame();
@@ -71,7 +87,7 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
-	if (rand() % 23 == 1 && VB.size()<curAN)
+	if (rand() % 23 == 1 && VB.size()<=4)
 	{
 		Bear b;
 		VB.push_back(b);
@@ -122,7 +138,7 @@ void CGAME::updatePosBear()
 void CGAME::updatePosOwl()
 {
 	
-	if (rand() % 18 == 1 && VO.size()<curAN)
+	if (rand() % 18 == 1 && VO.size()<=4)
 	{
 		Owl o;
 		VO.push_back(o);
@@ -205,6 +221,7 @@ void CGAME::printLevel()
 	cout << level;
 }
 
+<<<<<<< HEAD
 
 bool CGAME::isFW()
 {
@@ -221,6 +238,13 @@ void CGAME::finalWin()
 	finalw = true;
 	system("cls");
 	printYouWon();
+=======
+void CGAME::levelUp()
+{
+	level++;
+	if (level > 5)
+		level = 1;
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 }
 
 void CGAME::win()
@@ -233,6 +257,7 @@ void CGAME::win()
 	printLevel();
 	//=======
 	clrscr();
+<<<<<<< HEAD
 	gotoXY(50, 20);
 	bool finalw = false;
 	cout << "LEVEL " << level + 1 << endl;
@@ -349,6 +374,12 @@ void CGAME::win()
 		printFrame();
 		printLevel();
 	}
+=======
+	player->reset();
+	levelUp();
+	printFrame();
+	printLevel();
+>>>>>>> 3b713cf20ddce5eed4d82f02224f90312cbe9d94
 }
 
 void CGAME::levelUp()
@@ -365,7 +396,7 @@ void CGAME::updatePosAnimal()//Thực hiện cho CDINAUSOR & CBIRD di chuyển
 
 void CGAME::updatePosTrain()
 {
-	if (rand() % 22 == 1 && VT.size() < curVN)
+	if (rand() % 22 == 1 && VT.size() <= 4)
 	{
 		Train t;
 		VT.push_back(t);
@@ -397,7 +428,7 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-28)
 			{
 				if (lights->getState() == 0)
 				{
@@ -420,7 +451,7 @@ void CGAME::updatePosTrain()
 }
 void CGAME::updatePosShip()
 {
-	if (rand() % 22 == 1 && VS.size() < curVN)
+	if (rand() % 22 == 1 && VS.size() <= 4)
 	{
 		Ship s;
 		VS.push_back(s);
@@ -450,7 +481,7 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-28)
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -531,7 +562,7 @@ int CGAME::Menu()
 	while (!validInput)
 	{
 		printMenu();
-		if (_kbhit())
+		if (_kbhit)
 		{
 			input = _getch();
 			if (input == 27)
