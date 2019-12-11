@@ -81,7 +81,7 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	/*splashScreen();
+	splashScreen();
 	menuState = cg.Menu();
 
 	if (menuState == -1)
@@ -145,7 +145,7 @@ int main()
 			}
 		}
 	}
-	*/
+	
 	printYouWon();
 	gotoXY(0, 40);
 	return 0;
