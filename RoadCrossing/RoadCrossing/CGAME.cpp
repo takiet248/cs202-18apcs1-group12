@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿#include"CGAME.h"
+=======
+#include"CGAME.h"
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 const int MaxObject = 11;
 const int MaxSpeed = 30;
 
@@ -71,7 +75,11 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
+<<<<<<< HEAD
 	if (rand() % 23 == 1 && VB.size()<curAN)
+=======
+	if (rand() % 23 == 1 && VB.size() < curAN)
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 	{
 		Bear b;
 		VB.push_back(b);
@@ -100,7 +108,7 @@ void CGAME::updatePosBear()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
+			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX() > 16)
 			{
 				if (VB[i].getX() == -4)
 				{
@@ -121,8 +129,13 @@ void CGAME::updatePosBear()
 
 void CGAME::updatePosOwl()
 {
+<<<<<<< HEAD
 	
 	if (rand() % 18 == 1 && VO.size()<curAN)
+=======
+
+	if (rand() % 18 == 1 && VO.size() < curAN)
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 	{
 		Owl o;
 		VO.push_back(o);
@@ -151,7 +164,7 @@ void CGAME::updatePosOwl()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>14)
+			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX() > 14)
 			{
 				if (VO[i].getX() == -4)
 				{
@@ -195,7 +208,7 @@ void CGAME::printTrafficLights()
 		putchar(178);
 		putchar(178);
 	}
-	
+
 }
 
 void CGAME::printLevel()
@@ -224,9 +237,15 @@ void CGAME::finalWin()
 	VO.clear();
 	VT.clear();
 	VS.clear();
+<<<<<<< HEAD
+=======
+	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 	deallocate();
 }
 	
+
+
 
 
 void CGAME::win()
@@ -335,7 +354,10 @@ void CGAME::win()
 	}
 	else
 	{
+<<<<<<< HEAD
 		PlaySound(TEXT("TetrisPlus.wav"), NULL, SND_ASYNC);
+=======
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 		finalWin();
 	}
 	if (!finalw)
@@ -396,7 +418,7 @@ void CGAME::updatePosTrain()
 		{
 			if (lights->getState() == 0)
 			{
-				if(VT[i].getX() == 110)
+				if (VT[i].getX() == 110)
 				{
 					for (int j = 0; j < 8; ++j)
 						VT[i].move();
@@ -412,7 +434,11 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
+<<<<<<< HEAD
 			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
+=======
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX() < -20)
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 			{
 				if (lights->getState() == 0)
 				{
@@ -465,7 +491,11 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
+<<<<<<< HEAD
 			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
+=======
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX() < -22)
+>>>>>>> 24a411571f2f723a10c5767f9275041c8c416e6e
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -497,7 +527,7 @@ void CGAME::exitGame(HANDLE handle_)
 
 void CGAME::pauseGame(HANDLE handle_)
 {
-	SuspendThread(handle_);	
+	SuspendThread(handle_);
 }
 
 void CGAME::resumeGame(HANDLE handle_)
@@ -517,7 +547,7 @@ void CGAME::startGame()
 vector<Animal*> CGAME::getAnimal()
 {
 	vector<Animal*> res;
-	Animal *pA;
+	Animal* pA;
 	unsigned int i = 0;
 	for (i; i < VB.size() && i < VO.size(); ++i)
 	{
@@ -595,7 +625,7 @@ void CGAME::resetGame()
 vector<Vehicle*> CGAME::getVehicle()
 {
 	vector<Vehicle*> res;
-	Vehicle *pV;
+	Vehicle* pV;
 	unsigned int i = 0;
 	for (i; i < VT.size() && i < VS.size(); ++i)
 	{

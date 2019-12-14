@@ -1,4 +1,4 @@
-﻿#include"SplashScreen.h"
+#include"SplashScreen.h"
 
 /*void printSplashScreen()
 {
@@ -50,7 +50,7 @@ void printRoad()
 	TextColor(8);
 	Sleep(c);
 	cout << "        _\\///________\\///______\\/////_______\\///________\\///__\\////////////______" << endl;
-	
+
 }
 
 void printCrossing()
@@ -100,7 +100,7 @@ void memberName()
 	TextColor(15);
 	int a = 24;
 	gotoXY(75, a);
-	cout << "DESIGNED BY" << endl; 
+	cout << "DESIGNED BY" << endl;
 	gotoXY(74, a + 1);
 	cout << "Tran Anh Kiet" << endl;
 	gotoXY(74, a + 2);
@@ -111,7 +111,7 @@ void memberName()
 
 void splashScreen()
 {
-	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC );
+	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
 	printRoad();
 	printCrossing();
 	memberName();
