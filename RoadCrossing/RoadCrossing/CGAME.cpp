@@ -1,4 +1,4 @@
-﻿#include"CGAME.h"
+#include"CGAME.h"
 const int MaxObject = 11;
 const int MaxSpeed = 30;
 
@@ -16,7 +16,7 @@ CGAME::CGAME()
 {
 	player = new cPeople;
 	lights = new TrafficLight;
-	level = 13;
+	level = 1;
 	speed = 200;
 	curAN = 2;
 	curVN = 2;
@@ -71,7 +71,7 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
-	if (rand() % 23 == 1 && VB.size()<curAN)
+	if (rand() % 23 == 1 && VB.size() < curAN)
 	{
 		Bear b;
 		VB.push_back(b);
@@ -100,7 +100,7 @@ void CGAME::updatePosBear()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
+			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX() > 16)
 			{
 				if (VB[i].getX() == -4)
 				{
@@ -121,8 +121,8 @@ void CGAME::updatePosBear()
 
 void CGAME::updatePosOwl()
 {
-	
-	if (rand() % 18 == 1 && VO.size()<curAN)
+
+	if (rand() % 18 == 1 && VO.size() < curAN)
 	{
 		Owl o;
 		VO.push_back(o);
@@ -151,7 +151,7 @@ void CGAME::updatePosOwl()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>14)
+			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX() > 14)
 			{
 				if (VO[i].getX() == -4)
 				{
@@ -195,7 +195,7 @@ void CGAME::printTrafficLights()
 		putchar(178);
 		putchar(178);
 	}
-	
+
 }
 
 void CGAME::printLevel()
@@ -204,7 +204,6 @@ void CGAME::printLevel()
 	gotoXY(140, 5);
 	cout << level;
 }
-
 
 bool CGAME::isFW()
 {
@@ -221,17 +220,23 @@ void CGAME::finalWin()
 	finalw = true;
 	system("cls");
 	printYouWon();
+	VB.clear();
+	VO.clear();
+	VT.clear();
+	VS.clear();
+	PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
+	deallocate();
 }
+
+
 
 void CGAME::win()
 {
-	//<<<<<<< HEAD
 	system("cls");
 	Sleep(500);
 	player->reset();
 	printFrame();
 	printLevel();
-	//=======
 	clrscr();
 	gotoXY(50, 20);
 	bool finalw = false;
@@ -331,10 +336,7 @@ void CGAME::win()
 	}
 	else
 	{
-		system("cls");
-		PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
 		finalWin();
-
 	}
 	if (!finalw)
 	{
@@ -349,6 +351,19 @@ void CGAME::win()
 		printFrame();
 		printLevel();
 	}
+}
+
+void CGAME::lose()
+{
+	TextColor(14);
+	gotoXY(136, 7);
+	cout << "GAME OVER";
+	gotoXY(132, 8);
+	TextColor(15);
+	cout << "PRESS Y TO RESTART";
+	gotoXY(130, 9);
+	TextColor(12);
+	cout << "PRESS ESC TO EXIT GAME";
 }
 
 void CGAME::levelUp()
@@ -381,7 +396,7 @@ void CGAME::updatePosTrain()
 		{
 			if (lights->getState() == 0)
 			{
-				if(VT[i].getX() == 110)
+				if (VT[i].getX() == 110)
 				{
 					for (int j = 0; j < 8; ++j)
 						VT[i].move();
@@ -397,7 +412,7 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX() < -20)
 			{
 				if (lights->getState() == 0)
 				{
@@ -450,7 +465,7 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX() < -22)
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -482,7 +497,7 @@ void CGAME::exitGame(HANDLE handle_)
 
 void CGAME::pauseGame(HANDLE handle_)
 {
-	SuspendThread(handle_);	
+	SuspendThread(handle_);
 }
 
 void CGAME::resumeGame(HANDLE handle_)
@@ -502,7 +517,7 @@ void CGAME::startGame()
 vector<Animal*> CGAME::getAnimal()
 {
 	vector<Animal*> res;
-	Animal *pA;
+	Animal* pA;
 	unsigned int i = 0;
 	for (i; i < VB.size() && i < VO.size(); ++i)
 	{
@@ -562,12 +577,16 @@ void CGAME::deallocate()
 
 void CGAME::resetGame()
 {
+	finalw = false;
 	player->reset();
+	VT.clear();
+	VB.clear();
+	VO.clear();
+	VS.clear();
 	level = 1;
 	speed = 200;
 	curAN = 2;
 	curVN = 2;
-	finalw = false;
 	deallocate();
 	player = new cPeople;
 	lights = new TrafficLight;
@@ -576,7 +595,7 @@ void CGAME::resetGame()
 vector<Vehicle*> CGAME::getVehicle()
 {
 	vector<Vehicle*> res;
-	Vehicle *pV;
+	Vehicle* pV;
 	unsigned int i = 0;
 	for (i; i < VT.size() && i < VS.size(); ++i)
 	{
