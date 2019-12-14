@@ -1,4 +1,4 @@
-#ifndef _CGAME_H_
+﻿#ifndef _CGAME_H_
 #define _CGAME_H_
 
 #include<iostream>
@@ -26,14 +26,14 @@
 #include"SplashScreen.h"
 using namespace std;
 
-class CGAME
+class CGAME 
 {
 private:
 	deque<Bear> VB;
 	deque<Owl> VO;
 	deque<Ship> VS;
 	deque<Train> VT;
-	cPeople* player;
+	cPeople *player;
 	TrafficLight* lights;
 	int speed;
 	unsigned int curVN;
