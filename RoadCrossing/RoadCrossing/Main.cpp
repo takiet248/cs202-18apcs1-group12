@@ -1,4 +1,4 @@
-﻿#include"cPeople.h"
+#include"cPeople.h"
 #include"console.h"
 #include"Draw.h"
 #include"CGAME.h"
@@ -20,7 +20,7 @@ void sub()
 	cg.printLevel();
 	while (cg.isRunning())
 	{
-		while (cg.getPeople()->isDead()&&cg.isRunning())
+		while (cg.getPeople()->isDead() && cg.isRunning())
 			Sleep(1000);
 		if (!cg.isRunning())
 			return;
@@ -47,18 +47,10 @@ void sub()
 		}
 		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
 		{
-			TextColor(14);
-			gotoXY(136, 7);
-			cout << "GAME OVER";
-			gotoXY(132, 8);
-			TextColor(15);
-			cout << "PRESS Y TO RESTART";
-			gotoXY(130, 9);
-			TextColor(12);
-			cout << "PRESS ESC TO EXIT GAME";
+			cg.lose();
+			init = true;
 			if (menuState != 1)
 				PlaySound(TEXT("Opening.wav"), NULL, SND_ASYNC);
-
 		}
 		if (cg.getPeople()->isFinish())
 		{
@@ -68,8 +60,8 @@ void sub()
 			init = true;
 		}
 		if (cg.isFW())
-		{	
-			clrscr();			
+		{
+			clrscr();
 			break;
 		}
 		else
@@ -81,7 +73,7 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	/*splashScreen();
+	splashScreen();
 	menuState = cg.Menu();
 
 	if (menuState == -1)
@@ -89,11 +81,11 @@ int main()
 		system("cls");
 		return 0;
 	}
-	else 
+	else
 	{
 		PlaySound(TEXT("SaffronCity.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
-	
+
 	srand(time(NULL));
 	cg.drawGame();
 	char temp;
@@ -136,16 +128,15 @@ int main()
 		}
 		else
 		{
-			if (temp == 'Y') 
+			if (temp == 'Y')
 				cg.startGame();
-			else 
+			else
 			{
 				cg.exitGame(t1.native_handle());
 				return 0;
 			}
 		}
 	}
-	*/
 	printYouWon();
 	gotoXY(0, 40);
 	return 0;
