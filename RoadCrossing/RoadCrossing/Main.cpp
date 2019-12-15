@@ -5,10 +5,11 @@
 #include"Ship.h"
 #include"Owl.h"
 #include"Bear.h"
-#include"SplashScreen.h"
-#include<thread>
-#include"Menu.h"
+#include"Train.h"
 #include"TrafficLight.h"
+#include"SplashScreen.h"
+#include"Menu.h"
+#include<thread>
 
 bool init = true;
 char moving;
@@ -49,7 +50,7 @@ void sub()
 		{
 			cg.lose();
 			init = true;
-			if (menuState != 1)
+			if (menuState != -1)
 				PlaySound(TEXT("TeamRocket.wav"), NULL, SND_ASYNC);
 		}
 		if (cg.getPeople()->isFinish())
@@ -74,18 +75,19 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	//splashScreen();
-	//menuState = cg.Menu();
+	splashScreen();
+	menuState = cg.Menu();
 
-	/*if (menuState == -1)
+	if (menuState == -1)
 	{
 		system("cls");
 		return 0;
 	}
 	else 
 	{
+		system("cls");
 		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
-	}*/
+	}
 	
 	srand(time(NULL));
 	cg.drawGame();
@@ -99,6 +101,7 @@ int main()
 		{
 			if (temp == 27)
 			{
+				system("cls");
 				cg.exitGame(t1.native_handle());
 			}
 			else if (temp == 'P')

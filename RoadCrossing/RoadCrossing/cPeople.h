@@ -23,7 +23,6 @@ private:
 	bool mState = true;
 public:
 	cPeople();
-	void show();
 	void display();
 	void Up(int x);
 	void Down(int x);

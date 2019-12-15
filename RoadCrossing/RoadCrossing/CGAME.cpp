@@ -396,7 +396,7 @@ void CGAME::updatePosTrain()
 		{
 			if (lights->getState() == 0)
 			{
-				if(VT[i].getX() == 110)
+				if (VT[i].getX() == 110)
 				{
 					for (int j = 0; j < 8; ++j)
 						VT[i].move();
@@ -412,7 +412,7 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX()<-20)
+			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX() < -20)
 			{
 				if (lights->getState() == 0)
 				{
@@ -465,7 +465,7 @@ void CGAME::updatePosShip()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX()<-22)
+			if (i - 1 >= 0 && VS[i - 1].getX() - VS[i].getX() < -22)
 			{
 				if (VS[i].getX() == 110)
 				{
@@ -605,9 +605,9 @@ vector<Animal*> CGAME::getAnimal()
 
 int CGAME::Menu()
 {
-	bool validInput = false;
+	bool running = true;
 	char input;
-	while (!validInput)
+	while (running)
 	{
 		printMenu();
 		if (_kbhit())
@@ -621,8 +621,7 @@ int CGAME::Menu()
 			else
 			{
 				system("cls");
-				//printFrame();
-				validInput = true;
+				running = false;
 			}
 		}
 	}

@@ -16,12 +16,6 @@ cPeople::cPeople()
 	mState = true;
 }
 
-void cPeople::show()
-{
-	cout << mX << endl;
-	cout << mY << endl;
-}
-
 void cPeople::display()
 {
 	TextColor(15);

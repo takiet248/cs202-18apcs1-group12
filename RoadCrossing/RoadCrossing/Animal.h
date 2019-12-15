@@ -25,6 +25,5 @@ public:
 	virtual void display();
 	virtual void move();
 	virtual void erase(int n);
-	//Animal();
 };
 #endif // !_Animal_h_
