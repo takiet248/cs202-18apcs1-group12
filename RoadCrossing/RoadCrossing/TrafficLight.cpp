@@ -22,6 +22,16 @@ int TrafficLight::getTime()
 	return time;
 }
 
+void TrafficLight::setState(int state_)
+{
+	this->state = state_;
+}
+
+void TrafficLight::setTime(int time_)
+{
+	this->time = time_;
+}
+
 void TrafficLight::change(int newTime)
 {
 	time--;

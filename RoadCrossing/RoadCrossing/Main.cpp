@@ -162,7 +162,7 @@ int main()
 				}
 				else
 				{
-					//init = true;
+					init = true;
 					cg.loadGame(load);
 					cg.resumeGame((HANDLE)t1.native_handle());
 				}

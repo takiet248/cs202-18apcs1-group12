@@ -433,6 +433,7 @@ void CGAME::updatePosTrain()
 		}
 	}
 }
+
 void CGAME::updatePosShip()
 {
 	if (rand() % 22 == 1 && VS.size() < curVN)
@@ -528,9 +529,12 @@ void CGAME::loadGame(const string& fileName)
 	VB.clear();
 	printFrame();
 	printLevel();
-	int a, b, c, d;
-	fin >> c >> d;
-	player->setPos(c, d);
+	int a, b;
+	fin >> a >> b;
+	lights->setState(a);
+	lights->setTime(b);
+	fin >> a >> b;
+	player->setPos(a, b);
 	for (unsigned int i = 0; i < VO.size(); i++)
 	{
 		fin >> a >> b;
@@ -561,6 +565,7 @@ void CGAME::saveGame(const string& fileName)
 	fout << speed << endl;
 	fout << curAN << endl;
 	fout << curVN << endl;
+	fout << lights->getState() << " " << lights->getTime() << endl;
 	fout << player->getX() << " " << player->getY() << endl;
 	for (unsigned int i = 0; i < VO.size(); i++)
 		fout << VO[i].getX() << " " << VO[i].getY() << endl;

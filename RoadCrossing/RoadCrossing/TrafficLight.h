@@ -14,6 +14,8 @@ public:
 	TrafficLight(int state, int time);
 	int getState();
 	int getTime();
+	void setState(int state_);
+	void setTime(int time_);
 	void change(int newTime);
 };
 #endif // !_TrafficLight_h_
