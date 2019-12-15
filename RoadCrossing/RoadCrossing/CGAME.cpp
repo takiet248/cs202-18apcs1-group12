@@ -1,4 +1,5 @@
 #include"CGAME.h"
+
 const int MaxObject = 11;
 const int MaxSpeed = 30;
 
@@ -28,6 +29,7 @@ int CGAME::getSpeed()
 {
 	return speed;
 }
+
 void CGAME::drawGame()
 {
 	printFrame();
@@ -71,7 +73,7 @@ void CGAME::updatePosPeople(char key)
 
 void CGAME::updatePosBear()
 {
-	if (rand() % 23 == 1 && VB.size()<curAN)
+	if (rand() % 23 == 1 && VB.size() < curAN)
 	{
 		Bear b;
 		VB.push_back(b);
@@ -100,7 +102,7 @@ void CGAME::updatePosBear()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX()>16)
+			if (i - 1 >= 0 && VB[i - 1].getX() - VB[i].getX() > 16)
 			{
 				if (VB[i].getX() == -4)
 				{
@@ -121,8 +123,8 @@ void CGAME::updatePosBear()
 
 void CGAME::updatePosOwl()
 {
-	
-	if (rand() % 18 == 1 && VO.size()<curAN)
+
+	if (rand() % 18 == 1 && VO.size() < curAN)
 	{
 		Owl o;
 		VO.push_back(o);
@@ -151,7 +153,7 @@ void CGAME::updatePosOwl()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX()>14)
+			if (i - 1 >= 0 && VO[i - 1].getX() - VO[i].getX() > 14)
 			{
 				if (VO[i].getX() == -4)
 				{
@@ -195,7 +197,7 @@ void CGAME::printTrafficLights()
 		putchar(178);
 		putchar(178);
 	}
-	
+
 }
 
 void CGAME::printLevel()
@@ -226,8 +228,6 @@ void CGAME::finalWin()
 	VS.clear();
 	deallocate();
 }
-	
-
 
 void CGAME::win()
 {
@@ -433,6 +433,7 @@ void CGAME::updatePosTrain()
 		}
 	}
 }
+
 void CGAME::updatePosShip()
 {
 	if (rand() % 22 == 1 && VS.size() < curVN)
@@ -449,7 +450,6 @@ void CGAME::updatePosShip()
 		}
 		else if (i == 0)
 		{
-
 			if (VS[i].getX() == 110)
 			{
 				for (int j = 0; j < 8; ++j)
@@ -497,7 +497,7 @@ void CGAME::exitGame(HANDLE handle_)
 
 void CGAME::pauseGame(HANDLE handle_)
 {
-	SuspendThread(handle_);	
+	SuspendThread(handle_);
 }
 
 void CGAME::resumeGame(HANDLE handle_)
@@ -514,10 +514,74 @@ void CGAME::startGame()
 	printLevel();
 }
 
+void CGAME::loadGame(const string& fileName)
+{
+	ifstream fin(fileName, ios::in | ios::binary);
+	if (!fin.is_open()) { return; }
+	fin >> level;
+	fin >> speed;
+	fin >> curAN;
+	fin >> curVN;
+	system("cls");
+	VT.clear();
+	VS.clear();
+	VO.clear();
+	VB.clear();
+	printFrame();
+	printLevel();
+	int a, b;
+	fin >> a >> b;
+	lights->setState(a);
+	lights->setTime(b);
+	fin >> a >> b;
+	player->setPos(a, b);
+	for (unsigned int i = 0; i < VO.size(); i++)
+	{
+		fin >> a >> b;
+		VO[i].setPos(a, b);
+	}
+	for (unsigned int i = 0; i < VT.size(); i++)
+	{
+		fin >> a >> b;
+		VT[i].setPos(a, b);
+	}
+	for (unsigned int i = 0; i < VB.size(); i++)
+	{
+		fin >> a >> b;
+		VB[i].setPos(a, b);
+	}
+	for (unsigned int i = 0; i < VS.size(); i++)
+	{
+		fin >> a >> b;
+		VS[i].setPos(a, b);
+	}
+	fin.close();
+}
+
+void CGAME::saveGame(const string& fileName)
+{
+	ofstream fout(fileName, ios::out | ios::binary);
+	fout << level << endl;
+	fout << speed << endl;
+	fout << curAN << endl;
+	fout << curVN << endl;
+	fout << lights->getState() << " " << lights->getTime() << endl;
+	fout << player->getX() << " " << player->getY() << endl;
+	for (unsigned int i = 0; i < VO.size(); i++)
+		fout << VO[i].getX() << " " << VO[i].getY() << endl;
+	for (unsigned int i = 0; i < VT.size(); i++)
+		fout << VT[i].getX() << " " << VT[i].getY() << endl;
+	for (unsigned int i = 0; i < VB.size(); i++)
+		fout << VB[i].getX() << " " << VB[i].getY() << endl;
+	for (unsigned int i = 0; i < VS.size(); i++)
+		fout << VS[i].getX() << " " << VS[i].getY() << endl;
+	fout.close();
+}
+
 vector<Animal*> CGAME::getAnimal()
 {
 	vector<Animal*> res;
-	Animal *pA;
+	Animal* pA;
 	unsigned int i = 0;
 	for (i; i < VB.size() && i < VO.size(); ++i)
 	{
@@ -590,36 +654,11 @@ void CGAME::resetGame()
 	player = new cPeople;
 	lights = new TrafficLight;
 }
-void CGAME::saveGame(string fileName)
-{
-	ofstream out;
-	out.open(fileName);
-	if (out.fail())
-	{
-		cout << "Error" << endl;
-	}
-	else
-	{
-		out << level << endl;
-		out << player->getX() << " " << player->getY() << endl;
-		for (unsigned int i = 0; i < VO.size(); i++)
-			out << VO[i].getX() << " " << VO[i].getY() << endl;
-		for (unsigned int i = 0; i < VT.size(); i++)
-			out << VT[i].getX() << " " << VT[i].getY() << endl;
-		for (unsigned int i = 0; i < VB.size(); i++)
-			out << VB[i].getX() << " " << VB[i].getY() << endl;
-		for (unsigned int i = 0; i < VS.size(); i++)
-			out << VS[i].getX() << " " << VS[i].getY() << endl;
-	}
-	out.close();
-
-
-}
 
 vector<Vehicle*> CGAME::getVehicle()
 {
 	vector<Vehicle*> res;
-	Vehicle *pV;
+	Vehicle* pV;
 	unsigned int i = 0;
 	for (i; i < VT.size() && i < VS.size(); ++i)
 	{
