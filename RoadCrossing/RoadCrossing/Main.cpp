@@ -62,7 +62,7 @@ void sub()
 		}
 		if (cg.isFW())
 		{	
-			clrscr();			
+			clrscr();
 			break;
 		}
 		else
@@ -74,10 +74,10 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	splashScreen();
-	menuState = cg.Menu();
+	//splashScreen();
+	//menuState = cg.Menu();
 
-	if (menuState == -1)
+	/*if (menuState == -1)
 	{
 		system("cls");
 		return 0;
@@ -85,7 +85,7 @@ int main()
 	else 
 	{
 		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
-	}
+	}*/
 	
 	srand(time(NULL));
 	cg.drawGame();
@@ -112,13 +112,62 @@ int main()
 			}
 			else if (temp == 'R')
 			{
-				gotoXY(134, 8);
-				cout << "           ";
-				gotoXY(131, 9);
-				cout << "                  ";
+				gotoXY(121, 8);
+				cout << "                                      ";
+				gotoXY(121, 9);
+				cout << "                                      ";
+				gotoXY(121, 10);
+				cout << "                                      ";
 				cg.resumeGame((HANDLE)t1.native_handle());
 				moving = temp;
 			}
+			else if (temp == 'T')
+			{
+				cg.pauseGame(t1.native_handle());
+				TextColor(12);
+				gotoXY(125, 8);
+				cout << "PRESS R TO RESUME";
+				TextColor(14);
+				gotoXY(125, 9);
+				cout << "PLEASE INPUT YOUR FILENAME";
+				TextColor(15);
+				gotoXY(125, 10);
+				string save;
+				cin >> save;
+				cg.saveGame(save);
+			}
+			else if (temp == 'L')
+			{
+				cg.pauseGame(t1.native_handle());
+				TextColor(12);
+				gotoXY(123, 8);
+				cout << "INPUT THE NAME OF YOUR SAVED FILE";
+				gotoXY(123, 9);
+				TextColor(14);
+				string load;
+				cin >> load;
+				if (!ifstream(load, ios::in | ios::binary).is_open())
+				{
+					gotoXY(121, 8);
+					cout << "                                      ";
+					gotoXY(121, 9);
+					cout << "                                      ";
+					Sleep(500);
+					TextColor(14);
+					gotoXY(128, 8);
+					cout << "YOUR FILE DOES NOT EXIST";
+					TextColor(12);
+					gotoXY(131, 9);
+					cout << "PRESS R TO RESUME";
+				}
+				else
+				{
+					//init = true;
+					cg.loadGame(load);
+					cg.resumeGame((HANDLE)t1.native_handle());
+				}
+			}
+
 			else
 			{
 				if (cg.getPeople()->isFinish() || init)
@@ -134,14 +183,14 @@ int main()
 				PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 				cg.startGame();
 			}
-			else 
+			else if (temp == 27)
 			{
+				system("cls");
 				cg.exitGame(t1.native_handle());
 				return 0;
 			}
 		}
 	}
-	printYouWon();
 	gotoXY(0, 40);
 	return 0;
 }

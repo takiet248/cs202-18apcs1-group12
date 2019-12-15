@@ -35,7 +35,6 @@ void printPost()
 	{
 		gotoXY(110, i);
 		putchar(185);
-		//cout << endl;
 	}
 	for (int i = 1; i < 6; i++)
 	{
@@ -139,9 +138,9 @@ void printInstruction()
 	int a = 125, b = 20;
 	gotoXY(a, b + 1);
 	TextColor(6);
-	cout << "PRESS L TO SAVE GAME";
+	cout << "PRESS T TO SAVE GAME";
 	gotoXY(a, b + 3);
-	cout << "PRESS T TO LOAD GAME";
+	cout << "PRESS L TO LOAD GAME";
 	gotoXY(a, b + 5);
 	cout << "PRESS P TO PAUSE GAME";
 	gotoXY(a, b + 7);
@@ -272,6 +271,11 @@ void printYouWon()
 	printTwinkle();
 	printTwinkle();
 	printTwinkle();
+	printTwinkle();
+	printTwinkle();
+	printTwinkle();
+	printTwinkle();
+
 }
 
 void printTwinkle()

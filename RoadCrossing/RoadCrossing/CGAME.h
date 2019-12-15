@@ -56,8 +56,8 @@ public:
 	void pauseGame(HANDLE handle_);
 	void resumeGame(HANDLE handle_);
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
-	void loadGame(istream); // Thực hiện tải lại trò chơi đã lưu
-	void saveGame(string fileName); // Thực hiện lưu lại dữ liệu trò chơi
+	void loadGame(const string& fileName); // Thực hiện tải lại trò chơi đã lưu
+	void saveGame(const string& fileName); // Thực hiện lưu lại dữ liệu trò chơi
 	void updatePosPeople(char key); //Thực hiện điều khiển di chuyển của CPEOPLE
 	void updatePosVehicle(); //Thực hiện cho CTRUCK & CCAR di chuyển
 	void updatePosTrain();

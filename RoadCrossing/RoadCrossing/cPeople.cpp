@@ -100,6 +100,12 @@ int cPeople::getY()
 	return mY;
 }
 
+void cPeople::setPos(int a, int b)
+{
+	this->mX = a;
+	this->mY = b;
+}
+
 void cPeople::xClear(int m)       
 {
 	int x = m;

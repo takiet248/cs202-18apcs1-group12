@@ -34,6 +34,7 @@ public:
 	void yClear(int m);
 	int getX();
 	int getY();
+	void setPos(int a, int b);
 	//__________________________________________
 	bool isFinish();
 	bool isDead();

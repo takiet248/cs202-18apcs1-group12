@@ -1,4 +1,5 @@
 ﻿#include"CGAME.h"
+
 const int MaxObject = 11;
 const int MaxSpeed = 30;
 
@@ -28,6 +29,7 @@ int CGAME::getSpeed()
 {
 	return speed;
 }
+
 void CGAME::drawGame()
 {
 	printFrame();
@@ -226,8 +228,6 @@ void CGAME::finalWin()
 	VS.clear();
 	deallocate();
 }
-	
-
 
 void CGAME::win()
 {
@@ -449,7 +449,6 @@ void CGAME::updatePosShip()
 		}
 		else if (i == 0)
 		{
-
 			if (VS[i].getX() == 110)
 			{
 				for (int j = 0; j < 8; ++j)
@@ -512,6 +511,66 @@ void CGAME::startGame()
 	printFrame();
 	resetGame();
 	printLevel();
+}
+
+void CGAME::loadGame(const string& fileName)
+{
+	ifstream fin(fileName, ios::in | ios::binary);
+	if (!fin.is_open()) { return; }
+	fin >> level;
+	fin >> speed;
+	fin >> curAN;
+	fin >> curVN;
+	system("cls");
+	VT.clear();
+	VS.clear();
+	VO.clear();
+	VB.clear();
+	printFrame();
+	printLevel();
+	int a, b, c, d;
+	fin >> c >> d;
+	player->setPos(c, d);
+	for (unsigned int i = 0; i < VO.size(); i++)
+	{
+		fin >> a >> b;
+		VO[i].setPos(a, b);
+	}
+	for (unsigned int i = 0; i < VT.size(); i++)
+	{
+		fin >> a >> b;
+		VT[i].setPos(a, b);
+	}
+	for (unsigned int i = 0; i < VB.size(); i++)
+	{
+		fin >> a >> b;
+		VB[i].setPos(a, b);
+	}	
+	for (unsigned int i = 0; i < VS.size(); i++)
+	{
+		fin >> a >> b;
+		VS[i].setPos(a, b);
+	}
+	fin.close();
+}
+
+void CGAME::saveGame(const string& fileName)
+{
+	ofstream fout(fileName, ios::out | ios::binary);
+	fout << level << endl;
+	fout << speed << endl;
+	fout << curAN << endl;
+	fout << curVN << endl;
+	fout << player->getX() << " " << player->getY() << endl;
+	for (unsigned int i = 0; i < VO.size(); i++)
+		fout << VO[i].getX() << " " << VO[i].getY() << endl;
+	for (unsigned int i = 0; i < VT.size(); i++)
+		fout << VT[i].getX() << " " << VT[i].getY() << endl;
+	for (unsigned int i = 0; i < VB.size(); i++)
+		fout << VB[i].getX() << " " << VB[i].getY() << endl;
+	for (unsigned int i = 0; i < VS.size(); i++)
+		fout << VS[i].getX() << " " << VS[i].getY() << endl;
+	fout.close();
 }
 
 vector<Animal*> CGAME::getAnimal()

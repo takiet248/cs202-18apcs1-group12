@@ -30,6 +30,12 @@ int Animal::getY()
 	return mY;
 }
 
+void Animal::setPos(int a, int b)
+{
+	this->mX = a;
+	this->mY = b;
+}
+
 void Animal::erase(int n)
 {
 	int x = n;
