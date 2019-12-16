@@ -181,10 +181,20 @@ void CGAME::printTrafficLights()
 		gotoXY(111, 19);
 		putchar(178);
 		putchar(178);
+		gotoXY(114, 19);
+		cout << lights->getTime();
+		if (lights->getTime() > 0 && lights->getTime() < 10)
+		{
+			TextColor(0);
+			gotoXY(115, 19);
+			cout << "  ";
+		}
 		TextColor(0);
 		gotoXY(111, 20);
 		putchar(178);
 		putchar(178);
+		gotoXY(114, 20);
+		cout << "   ";
 	}
 	else
 	{
@@ -193,9 +203,19 @@ void CGAME::printTrafficLights()
 		putchar(178);
 		putchar(178);
 		TextColor(2);
+		gotoXY(114, 19);
+		cout << "   ";
 		gotoXY(111, 20);
 		putchar(178);
 		putchar(178);
+		gotoXY(114, 20);
+		cout << lights->getTime();
+		if (lights->getTime() > 0 && lights->getTime() < 10)
+		{
+			TextColor(0);
+			gotoXY(115, 20);
+			cout << "  ";
+		}
 	}
 
 }
