@@ -59,7 +59,7 @@ public:
 	void startGame(); // Thực hiện bắt đầu vào trò chơi
 	void resetGame(); // Thực hiện thiết lập lại toàn bộ dữ liệu như lúc đầu
 
-	void loadGame(const string& fileName); // Thực hiện tải lại trò chơi đã lưu
+	bool loadGame(const string& fileName); // Thực hiện tải lại trò chơi đã lưu
 	void saveGame(const string& fileName); // Thực hiện lưu lại dữ liệu trò chơi
 
 	void updatePosPeople(char key); //Thực hiện điều khiển di chuyển của CPEOPLE

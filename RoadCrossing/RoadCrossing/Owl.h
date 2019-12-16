@@ -9,6 +9,7 @@ class Owl : public Animal
 {
 public:
 	Owl();
+	Owl(int a, int b);
 	void display();
 };
 #endif // !_Owl_h_

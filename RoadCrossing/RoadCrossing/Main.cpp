@@ -75,19 +75,24 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	/*splashScreen();
+	splashScreen();
 	menuState = cg.Menu();
-
 	if (menuState == -1)
 	{
 		system("cls");
 		return 0;
 	}
+	else if (menuState == 1)
+	{
+		init = false;
+		system("cls");
+		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
+	}
 	else
 	{
 		system("cls");
 		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
-	}*/
+	}
 
 	srand(time(NULL));
 	cg.drawGame();
@@ -127,16 +132,20 @@ int main()
 			else if (temp == 'T')
 			{
 				cg.pauseGame(t1.native_handle());
-				TextColor(12);
-				gotoXY(125, 8);
-				cout << "PRESS R TO RESUME";
 				TextColor(14);
-				gotoXY(125, 9);
+				gotoXY(125, 8);
 				cout << "PLEASE INPUT YOUR FILENAME";
 				TextColor(15);
+				gotoXY(125, 9);
+				string name;
+				ShowCur(true);
+				cin >> name;
+				ShowCur(false);
 				gotoXY(125, 10);
-				string save;
-				cin >> save;
+				TextColor(12);
+				cout << "FILE SAVED! PRESS R TO RESUME";
+				string tail = ".txt";
+				string save = name + tail;
 				cg.saveGame(save);
 			}
 			else if (temp == 'L')
@@ -147,9 +156,14 @@ int main()
 				cout << "INPUT THE NAME OF YOUR SAVED FILE";
 				gotoXY(123, 9);
 				TextColor(14);
-				string load;
-				cin >> load;
-				if (!ifstream(load, ios::in | ios::binary).is_open())
+				string name_;
+				ShowCur(true);
+				cin >> name_;
+				ShowCur(false);
+				string tail_ = ".txt";
+				string load = name_ + tail_;
+				bool ans = cg.loadGame(load);
+				if (ans == false)
 				{
 					gotoXY(121, 8);
 					cout << "                                      ";
@@ -165,12 +179,10 @@ int main()
 				}
 				else
 				{
-					init = true;
 					cg.loadGame(load);
 					cg.resumeGame((HANDLE)t1.native_handle());
 				}
 			}
-
 			else
 			{
 				if (cg.getPeople()->isFinish() || init)

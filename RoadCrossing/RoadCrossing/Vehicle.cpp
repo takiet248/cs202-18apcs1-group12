@@ -10,12 +10,6 @@ int Vehicle::getY()
 	return mY;
 }
 
-void Vehicle::setPos(int a, int b)
-{
-	this->mX = a;
-	this->mY = b;
-}
-
 void Vehicle::display()
 {
 	for (int i = 0; i < 4; i++)

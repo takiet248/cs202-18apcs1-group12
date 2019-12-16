@@ -33,6 +33,7 @@ int CGAME::getSpeed()
 void CGAME::drawGame()
 {
 	printFrame();
+	printLevel();
 }
 
 cPeople* CGAME::getPeople()
@@ -112,6 +113,7 @@ void CGAME::updatePosBear()
 				}
 				else
 				{
+					VB[i].display();
 					VB[i].move();
 					VB[i].erase(VB[i].getX() - 1);
 					VB[i].display();
@@ -534,10 +536,13 @@ void CGAME::startGame()
 	printLevel();
 }
 
-void CGAME::loadGame(const string& fileName)
+bool CGAME::loadGame(const string& fileName)
 {
-	ifstream fin(fileName, ios::in | ios::binary);
-	if (!fin.is_open()) { return; }
+	ifstream fin;
+	fin.open(fileName);
+	if (!fin.is_open()) { return false; }
+	int o_, t_, b_, s_;
+	fin >> o_ >> t_ >> b_ >> s_;
 	fin >> level;
 	fin >> speed;
 	fin >> curAN;
@@ -555,32 +560,49 @@ void CGAME::loadGame(const string& fileName)
 	lights->setTime(b);
 	fin >> a >> b;
 	player->setPos(a, b);
-	for (unsigned int i = 0; i < VO.size(); i++)
+	for (int i = 0; i < o_; i++)
 	{
 		fin >> a >> b;
-		VO[i].setPos(a, b);
+		Owl O(a, b);
+		VO.push_back(O);
 	}
-	for (unsigned int i = 0; i < VT.size(); i++)
+	for (int i = 0; i < t_; i++)
 	{
 		fin >> a >> b;
-		VT[i].setPos(a, b);
+		Train T(a, b);
+		VT.push_back(T);
 	}
-	for (unsigned int i = 0; i < VB.size(); i++)
+	for (int i = 0; i < b_; i++)
 	{
 		fin >> a >> b;
-		VB[i].setPos(a, b);
+		Bear B(a, b);
+		VB.push_back(B);
 	}
-	for (unsigned int i = 0; i < VS.size(); i++)
+
+	for (int i = 0; i < s_; i++)
 	{
 		fin >> a >> b;
-		VS[i].setPos(a, b);
+		Ship S(a, b);
+		VS.push_back(S);
 	}
 	fin.close();
+	return true;
 }
 
 void CGAME::saveGame(const string& fileName)
 {
-	ofstream fout(fileName, ios::out | ios::binary);
+	int a = 0, b = 0, c = 0, d = 0;
+	for (unsigned int i = 0; i < VO.size(); i++)
+		a++;
+	for (unsigned int i = 0; i < VT.size(); i++)
+		b++;
+	for (unsigned int i = 0; i < VB.size(); i++)
+		c++;
+	for (unsigned int i = 0; i < VS.size(); i++)
+		d++;
+	ofstream fout;
+	fout.open(fileName);
+	fout << a << " " << b << " " << c << " " << d << endl;
 	fout << level << endl;
 	fout << speed << endl;
 	fout << curAN << endl;
@@ -633,10 +655,65 @@ int CGAME::Menu()
 		if (_kbhit())
 		{
 			input = _getch();
+			input = toupper(input);
 			if (input == 27)
 			{
 				system("cls");
 				return -1;
+			}
+			else if (input == 'L')
+			{
+				gotoXY(97, 18);
+				TextColor(10);
+				cout << "INPUT THE NAME OF YOUR SAVED FILE";
+				gotoXY(131, 18);
+				TextColor(14);
+				string name_;
+				ShowCur(true);
+				cin >> name_;
+				string tail_ = ".txt";
+				string load = name_ + tail_;
+				ShowCur(false);
+				bool ans = loadGame(load);
+				if (ans == false)
+				{
+					gotoXY(97, 18);
+					cout << "                                                      ";
+					Sleep(100);
+					TextColor(14);
+					gotoXY(97, 18);
+					cout << "YOUR FILE DOES NOT EXIST";
+					TextColor(12);
+					gotoXY(97, 19);
+					cout << "PRESS ANY KEY TO GET BACK TO MENU";
+					input = _getch();
+					input = toupper(input);
+					gotoXY(97, 18);
+					cout << "                        ";
+					gotoXY(97, 19);
+					cout << "                                 ";
+				}
+				else
+				{
+					running = false;
+					loadGame(load);
+					return 1;
+				}
+			}
+			else if (input == 'S')
+			{
+				TextColor(14);
+				gotoXY(97, 21);
+				cout << "THIS FUNTION WILL BE AVAILABLE SOON";
+				TextColor(12);
+				gotoXY(97, 22);
+				cout << "PRESS ANY KEY TO GET BACK TO MENU";
+				input = _getch();
+				input = toupper(input);
+				gotoXY(97, 21);
+				cout << "                                   ";
+				gotoXY(97, 22);
+				cout << "                                 ";
 			}
 			else
 			{

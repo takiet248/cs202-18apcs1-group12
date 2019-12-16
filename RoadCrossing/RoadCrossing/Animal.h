@@ -21,7 +21,6 @@ protected:
 public:
 	int getX();
 	int getY();
-	virtual void setPos(int a, int b);
 	virtual void display();
 	virtual void move();
 	virtual void erase(int n);

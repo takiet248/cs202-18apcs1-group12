@@ -10,6 +10,7 @@ class Ship : public Vehicle
 {
 public:
 	Ship();
+	Ship(int a, int b);
 	void display();
 };
 #endif // !_Ship_h_

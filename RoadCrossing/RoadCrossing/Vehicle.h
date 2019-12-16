@@ -17,10 +17,8 @@ protected:
 	vShape A;
 	int mX, mY;
 public:
-	//Vehicle();
 	int getX();
 	int getY();
-	virtual void setPos(int a, int b);
 	virtual void display();
 	virtual void move();
 	virtual void erase(int n);

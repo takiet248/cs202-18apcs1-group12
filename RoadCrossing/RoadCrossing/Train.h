@@ -10,6 +10,7 @@ class Train : public Vehicle
 {
 public:
 	Train();
+	Train(int a, int b);
 	void display();
 };
 #endif // !_Train_h_
