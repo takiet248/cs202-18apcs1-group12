@@ -404,8 +404,18 @@ void CGAME::updatePosTrain()
 {
 	if (rand() % 22 == 1 && VT.size() < curVN)
 	{
-		Train t;
-		VT.push_back(t);
+		if (lights->getState() == 0)
+		{
+			Train t;
+			VT.push_back(t);
+		}
+	}
+	for (unsigned int i = 0; i < VT.size(); ++i)
+	{
+		if (lights->getState() == 1 && VT[i].getX() < 105 && VT[i].getX() > 0)
+		{
+			VT[i].display();
+		}
 	}
 	for (unsigned int i = 0; i < VT.size(); ++i)
 	{
@@ -434,9 +444,9 @@ void CGAME::updatePosTrain()
 		}
 		else
 		{
-			if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX() < -20)
+			if (lights->getState() == 0)
 			{
-				if (lights->getState() == 0)
+				if (i - 1 >= 0 && VT[i - 1].getX() - VT[i].getX() < -20)
 				{
 					if (VT[i].getX() == 110)
 					{
@@ -656,7 +666,7 @@ int CGAME::Menu()
 		{
 			input = _getch();
 			input = toupper(input);
-			if (input == 27)
+			if (input == 'E')
 			{
 				system("cls");
 				return -1;
@@ -715,7 +725,7 @@ int CGAME::Menu()
 				gotoXY(97, 22);
 				cout << "                                 ";
 			}
-			else
+			else if (input == 'N')
 			{
 				system("cls");
 				running = false;

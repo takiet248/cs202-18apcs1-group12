@@ -23,8 +23,6 @@ void sub()
 	{
 		while (cg.getPeople()->isDead() && cg.isRunning())
 			Sleep(1000);
-		if (!cg.isRunning())
-			return;
 		if (!cg.getPeople()->isDead() && !cg.isFW())
 		{
 			if (init)
@@ -75,7 +73,7 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	splashScreen();
+	/*splashScreen();
 	menuState = cg.Menu();
 	if (menuState == -1)
 	{
@@ -93,7 +91,7 @@ int main()
 		system("cls");
 		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
-
+	*/
 	srand(time(NULL));
 	cg.drawGame();
 	char temp;
@@ -113,9 +111,10 @@ int main()
 			{
 				cg.pauseGame(t1.native_handle());
 				gotoXY(134, 8);
-				TextColor(15);
+				TextColor(12);
 				cout << "GAME PAUSED";
 				gotoXY(131, 9);
+				TextColor(14);
 				cout << "PRESS R TO RESUME";
 			}
 			else if (temp == 'R')

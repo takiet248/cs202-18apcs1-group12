@@ -21,6 +21,7 @@ private:
 	Pshape A;
 	int mX, mY;
 	bool mState = true;
+	int color;
 public:
 	cPeople();
 	void display();

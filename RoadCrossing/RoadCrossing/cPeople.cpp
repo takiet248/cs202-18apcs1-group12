@@ -5,6 +5,8 @@ cPeople::cPeople()
 {
 	mX = 55;
 	mY = 31;
+	mState = true;
+
 	A.a[0][0] = A.a[0][4] = A.a[1][3] = A.a[1][4] = ' ';
 	A.a[2][0] = A.a[2][1] = A.a[2][4] = ' ';
 	A.a[3][0] = A.a[3][2] = A.a[3][3] = ' ';
@@ -13,12 +15,13 @@ cPeople::cPeople()
 	A.a[0][3] = A.a[1][2] = A.a[2][3] = A.a[3][4] = '\\';
 	A.a[1][1] = A.a[2][2] = '/';
 	A.a[3][1] = '|';
-	mState = true;
+	color = 15;
+
 }
 
 void cPeople::display()
 {
-	TextColor(15);
+	TextColor(color);
 	int a, b;
 	for (int i = 0; i < 4; i++)
 	{
@@ -121,6 +124,17 @@ bool cPeople::isImpactWAnimal(vector<Animal*> VA)
 	{
 		if (mX <= VA[i]->getX()+4  && mX >= VA[i]->getX()-5 && mY == VA[i]->getY())
 		{
+			A.a[0][1] = '0';
+			A.a[0][2] = '_';
+			A.a[0][3] = A.a[0][4] = A.a[1][0] = A.a[1][1] = A.a[1][4] = ' ';
+			A.a[0][0] = A.a[1][2] = A.a[2][3] = '\\';
+			A.a[2][0] = A.a[2][1] = ' ';
+			A.a[2][2] = A.a[2][4] = '/';
+			A.a[1][3] = '|';
+			A.a[3][2] = '\\';
+			A.a[3][0] = A.a[3][1] = A.a[3][3] = A.a[3][4] = ' ';
+			color = 4;
+			display();
 			mState = false;
 			return true;
 		}
@@ -134,6 +148,17 @@ bool cPeople::isImpactWVehicle(vector<Vehicle*> VV)
 	{
 		if (mX <= VV[i]->getX() + 8 && mX >= VV[i]->getX() - 4 && mY == VV[i]->getY())
 		{
+			A.a[0][1] = '0';
+			A.a[0][2] = '_';
+			A.a[0][3] = A.a[0][4] = A.a[1][0] = A.a[1][1] = A.a[1][4] = ' ';
+			A.a[0][0] = A.a[1][2] = A.a[2][3] = '\\';
+			A.a[2][0] = A.a[2][1] = ' ';
+			A.a[2][2] = A.a[2][4] = '/';
+			A.a[1][3] = '|';
+			A.a[3][2] = '\\';
+			A.a[3][0] = A.a[3][1] = A.a[3][3] = A.a[3][4] = ' ';
+			color = 4;
+			display();
 			mState = false;
 			return true;
 		}
@@ -146,4 +171,13 @@ void cPeople::reset()
 	mX = 55;
 	mY = 31;
 	mState = true;
+	A.a[0][0] = A.a[0][4] = A.a[1][3] = A.a[1][4] = ' ';
+	A.a[2][0] = A.a[2][1] = A.a[2][4] = ' ';
+	A.a[3][0] = A.a[3][2] = A.a[3][3] = ' ';
+	A.a[0][1] = '0';
+	A.a[0][2] = A.a[1][0] = '_';
+	A.a[0][3] = A.a[1][2] = A.a[2][3] = A.a[3][4] = '\\';
+	A.a[1][1] = A.a[2][2] = '/';
+	A.a[3][1] = '|';
+	color = 15;
 }
