@@ -73,7 +73,7 @@ int main()
 {
 	FixConsoleWindow();
 	Nocursortype();
-	/*splashScreen();
+	splashScreen();
 	menuState = cg.Menu();
 	if (menuState == -1)
 	{
@@ -91,7 +91,7 @@ int main()
 		system("cls");
 		PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 	}
-	*/
+	
 	srand(time(NULL));
 	cg.drawGame();
 	char temp;

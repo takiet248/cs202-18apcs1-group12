@@ -404,11 +404,11 @@ void CGAME::updatePosTrain()
 {
 	if (rand() % 22 == 1 && VT.size() < curVN)
 	{
-		if (lights->getState() == 0)
-		{
+		//if (lights->getState() == 0)
+		//{
 			Train t;
 			VT.push_back(t);
-		}
+		//}
 	}
 	for (unsigned int i = 0; i < VT.size(); ++i)
 	{
