@@ -3,16 +3,6 @@
 const int MaxObject = 11;
 const int MaxSpeed = 30;
 
-CGAME::~CGAME()
-{
-	if (player)
-		delete[]player;
-	player = nullptr;
-	if (lights)
-		delete[]lights;
-	lights = nullptr;
-}
-
 CGAME::CGAME()
 {
 	player = new cPeople;
@@ -24,6 +14,18 @@ CGAME::CGAME()
 	finalw = false;
 	run = true;
 }
+
+CGAME::~CGAME()
+{
+	if (player)
+		delete[]player;
+	player = nullptr;
+	if (lights)
+		delete[]lights;
+	lights = nullptr;
+}
+
+
 
 int CGAME::getSpeed()
 {
@@ -653,6 +655,13 @@ vector<Animal*> CGAME::getAnimal()
 		res.push_back(pA);
 	}
 	return res;
+}
+
+CGAME* CGAME::getInstance()
+{
+	if (!instance)
+		instance = new CGAME;
+	return instance;
 }
 
 int CGAME::Menu()

@@ -11,61 +11,62 @@
 #include"Menu.h"
 #include<thread>
 
+CGAME* CGAME::instance = nullptr;
 bool init = true;
 char moving;
-CGAME cg;
+CGAME* cg = CGAME::getInstance();
 int menuState;
 
 void sub()
 {
-	cg.printLevel();
-	while (cg.isRunning())
+	cg->printLevel();
+	while (cg->isRunning())
 	{
-		while (cg.getPeople()->isDead() && cg.isRunning())
+		while (cg->getPeople()->isDead() && cg->isRunning())
 			Sleep(1000);
-		if (!cg.getPeople()->isDead() && !cg.isFW())
+		if (!cg->getPeople()->isDead() && !cg->isFW())
 		{
 			if (init)
 			{
 				for (int i = 0; i < 100; ++i)
 				{
-					cg.updatePosAnimal();
-					cg.updatePosVehicle();
-					cg.printTrafficLights();
+					cg->updatePosAnimal();
+					cg->updatePosVehicle();
+					cg->printTrafficLights();
 				}
 				init = false;
 			}
 			else
 			{
-				cg.updatePosPeople(moving);
+				cg->updatePosPeople(moving);
 				moving = ' ';
-				cg.updatePosAnimal();
-				cg.updatePosVehicle();
-				cg.printTrafficLights();
+				cg->updatePosAnimal();
+				cg->updatePosVehicle();
+				cg->printTrafficLights();
 			}
 		}
-		if (cg.getPeople()->isImpactWAnimal(cg.getAnimal()) || cg.getPeople()->isImpactWVehicle(cg.getVehicle()))
+		if (cg->getPeople()->isImpactWAnimal(cg->getAnimal()) || cg->getPeople()->isImpactWVehicle(cg->getVehicle()))
 		{
-			cg.lose();
+			cg->lose();
 			init = true;
 			if (menuState != -1)
 				PlaySound(TEXT("TeamRocket.wav"), NULL, SND_ASYNC);
 		}
-		if (cg.getPeople()->isFinish())
+		if (cg->getPeople()->isFinish())
 		{
 			PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
 			gotoXY(136, 9);
 			TextColor(14);
-			cg.win();
+			cg->win();
 			init = true;
 		}
-		if (cg.isFW())
+		if (cg->isFW())
 		{
 			clrscr();
 			break;
 		}
 		else
-			Sleep(cg.getSpeed());
+			Sleep(cg->getSpeed());
 	}
 }
 
@@ -74,7 +75,7 @@ int main()
 	FixConsoleWindow();
 	Nocursortype();
 	splashScreen();
-	menuState = cg.Menu();
+	menuState = cg->Menu();
 	if (menuState == -1)
 	{
 		system("cls");
@@ -93,23 +94,23 @@ int main()
 	}
 	
 	srand(time(NULL));
-	cg.drawGame();
+	cg->drawGame();
 	char temp;
 	thread t1(sub);
 	while (true)
 	{
 		temp = _getch();
 		temp = toupper(temp);
-		if (!cg.getPeople()->isDead() && !cg.isFW())
+		if (!cg->getPeople()->isDead() && !cg->isFW())
 		{
 			if (temp == 27)
 			{
 				system("cls");
-				cg.exitGame(t1.native_handle());
+				cg->exitGame(t1.native_handle());
 			}
 			else if (temp == 'P')
 			{
-				cg.pauseGame(t1.native_handle());
+				cg->pauseGame(t1.native_handle());
 				gotoXY(134, 8);
 				TextColor(12);
 				cout << "GAME PAUSED";
@@ -125,12 +126,12 @@ int main()
 				cout << "                                      ";
 				gotoXY(121, 10);
 				cout << "                                      ";
-				cg.resumeGame((HANDLE)t1.native_handle());
+				cg->resumeGame((HANDLE)t1.native_handle());
 				moving = temp;
 			}
 			else if (temp == 'T')
 			{
-				cg.pauseGame(t1.native_handle());
+				cg->pauseGame(t1.native_handle());
 				TextColor(14);
 				gotoXY(125, 8);
 				cout << "PLEASE INPUT YOUR FILENAME";
@@ -145,11 +146,11 @@ int main()
 				cout << "FILE SAVED! PRESS R TO RESUME";
 				string tail = ".txt";
 				string save = name + tail;
-				cg.saveGame(save);
+				cg->saveGame(save);
 			}
 			else if (temp == 'L')
 			{
-				cg.pauseGame(t1.native_handle());
+				cg->pauseGame(t1.native_handle());
 				TextColor(12);
 				gotoXY(123, 8);
 				cout << "INPUT THE NAME OF YOUR SAVED FILE";
@@ -161,7 +162,7 @@ int main()
 				ShowCur(false);
 				string tail_ = ".txt";
 				string load = name_ + tail_;
-				bool ans = cg.loadGame(load);
+				bool ans = cg->loadGame(load);
 				if (ans == false)
 				{
 					gotoXY(121, 8);
@@ -178,13 +179,13 @@ int main()
 				}
 				else
 				{
-					cg.loadGame(load);
-					cg.resumeGame((HANDLE)t1.native_handle());
+					cg->loadGame(load);
+					cg->resumeGame((HANDLE)t1.native_handle());
 				}
 			}
 			else
 			{
-				if (cg.getPeople()->isFinish() || init)
+				if (cg->getPeople()->isFinish() || init)
 					moving = ' ';
 				else
 					moving = temp;
@@ -195,12 +196,12 @@ int main()
 			if (temp == 'Y')
 			{
 				PlaySound(TEXT("LuckyNumberShow.wav"), NULL, SND_ASYNC | SND_LOOP);
-				cg.startGame();
+				cg->startGame();
 			}
 			else if (temp == 27)
 			{
 				system("cls");
-				cg.exitGame(t1.native_handle());
+				cg->exitGame(t1.native_handle());
 				return 0;
 			}
 		}

@@ -41,15 +41,17 @@ private:
 	unsigned int curAN;
 	bool finalw;
 	bool run;
+	static CGAME* instance;
+	CGAME();
+	~CGAME(); // Hủy tài nguyên đã cấp phát
 public:
 	bool init = true;
-	CGAME(); //Chuẩn bị dữ liệu cho tất cả các đối tượng
-	~CGAME(); // Hủy tài nguyên đã cấp phát
 	void deallocate();
 	cPeople* getPeople();//Lấy thông tin người
 	vector<Vehicle*>getVehicle(); //Lấy thông tin phương tiện
 	vector<Animal*> getAnimal(); //Lấy thông tin động vật
-
+	static CGAME* getInstance();
+	
 	int Menu(); //Menu
 	void drawGame(); //Thực hiện vẽ trò chơi ra màn hình sau khi có dữ liệu
 
@@ -80,5 +82,7 @@ public:
 	void finalWin();
 	bool isFW();
 };
+
+
 #endif // !_CGAME_H_
 
